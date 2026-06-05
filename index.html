@@ -78,7 +78,7 @@
   .lang-btn.active .global-lang-dropdown { display: block; }
 
   .wifi-badge {
-    position: absolute; top: 60px; right: 18px; z-index: 20;
+    position: absolute; top: 12px; right: 18px; z-index: 20;
     background: var(--pink);
     border-radius: 8px; padding: 8px 12px;
     font-size: 13px; font-weight: 500; color: #fff;
@@ -147,7 +147,7 @@
   .cat-item.active { background: var(--pink-light); border-color: #fff; }
   .cat-item:active { transform: scale(0.94); }
   .cat-item span { font-size: 12px; color: #fff; display: block; font-weight: 500; }
-  .menu-icon { width: 76px; height: 55px; object-fit: contain; display: inline-block; vertical-align: middle; }
+  .menu-icon { width: 76px; height: 35px; object-fit: contain; display: inline-block; vertical-align: middle; }
 
   .search-bar-wrap { padding: 0 16px 12px; flex-shrink: 0; display: none; }
   .search-bar-wrap.visible { display: block; }
@@ -159,8 +159,8 @@
   .food-card:active { transform: scale(0.97); }
   .food-card img { width: 100%; aspect-ratio: 1/1; object-fit: cover; display: block; }
   .food-card .card-body { padding: 8px 10px 10px; }
-  .food-card .dish-name { font-size: 13px; font-weight: 500; color: var(--text-light); margin-bottom: 3px; line-height: 1.3; }
-  .food-card .dish-price { font-size: 13px; color: var(--gold); font-weight: 600; }
+  .food-card .dish-name { font-size: 17px; font-weight: 700; color: var(--text-light); margin-bottom: 3px; line-height: 1.3; }
+  .food-card .dish-price { font-size: 14px; color: var(--pink); font-weight: 700; }
   
   .back-btn { position: absolute; top: 14px; left: 10px; background: none; border: none; cursor: pointer; padding: 4px 8px; color: #fff; font-size: 22px; z-index: 20; line-height: 1; }
 
@@ -185,7 +185,7 @@
   .modal-sheet img { width: 100%; height: 220px; object-fit: cover; border-radius: 20px 20px 0 0; }
   .modal-body { padding: 16px 20px; }
   .modal-name { font-size: 20px; font-weight: 600; margin-bottom: 4px; color: #1a1a1a; }
-  .modal-price { color: var(--gold); font-size: 18px; font-weight: 600; margin-bottom: 10px; }
+  .modal-price { color: var(--pink); font-size: 20px; font-weight: 900; margin-bottom: 10px; }
   .modal-desc { color: var(--text-muted); font-size: 14px; line-height: 1.6; margin-bottom: 20px; }
   .modal-close { position: absolute; top: 12px; right: 16px; background: rgba(0,0,0,0.5); border: none; width: 32px; height: 32px; border-radius: 50%; color: #fff; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
   .modal-add { width: 100%; padding: 15px; background: var(--pink); color: #fff; border: none; border-radius: 10px; font-size: 16px; font-weight: 500; font-family: inherit; cursor: pointer; }
@@ -208,16 +208,18 @@
   </video>
   <div class="video-overlay"></div>
   
+  
   <div class="lang-btn" id="globalLangBtnWrapper">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg>
-    <span id="globalLangLabel">English ▾</span>
+
+    <span id="globalLangLabel">Türkçe ▾</span>
     <div class="global-lang-dropdown" id="globalLangDropdown">
-      <div data-lang="tr">English</div>
+      <div data-lang="tr">T</div>
       <div data-lang="ku">کوردی</div>
     </div>
   </div>
   
-  <div class="wifi-badge">📶 KOCHAR<br>🔑 KOCHAR123</div>
+  
+  <div class="wifi-badge">🌐 NEFES<br>🔐 NEFES123</div>
   <div class="landing-bottom">
     <button class="cta-btn cta-menu" id="menuBtnLanding">Menu</button>
     <div class="social-row">
@@ -241,9 +243,9 @@
     </div>
     <div class="lang-bar" id="menuLangBar">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg>
-      <span id="menuLangLabel">English ▾</span>
+      <span id="menuLangLabel">Türkçe ▾</span>
       <div class="lang-dropdown" id="menuLangDropdown">
-        <div data-lang="tr">English</div>
+        <div data-lang="tr">Türkçe</div>
         <div data-lang="ku">کوردی</div>
       </div>
     </div>
@@ -269,7 +271,7 @@
 </div>
 
 <!-- MODAL & CART -->
-<div class="modal-overlay" id="itemModal" onclick="closeModal(event)"><div class="modal-sheet"><img id="modalImg" src=""><button class="modal-close" onclick="closeModalDirect()">✕</button><div class="modal-body"><div class="modal-name" id="modalName"></div><div class="modal-price" id="modalPrice"></div><div class="modal-desc" id="modalDesc"></div><button class="modal-add" onclick="addToCartFromModal()">Sepete Ekle 🛒</button></div></div></div>
+<div class="modal-overlay" id="itemModal" onclick="closeModal(event)"><div class="modal-sheet"><img id="modalImg" src=""><button class="modal-close" onclick="closeModalDirect()">✕</button><div class="modal-body"><div class="modal-name" id="modalName"></div><div class="modal-price" id="modalPrice"></div><div class="modal-desc" id="modalDesc"></div></div></div></div>
 <button class="cart-fab" id="cartFab" onclick="showToast('Sipariş mutfağa gönderildi! 🍽️')"><svg viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96C5 16.1 6.1 17 7 17h11v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63H19c.75 0 1.41-.41 1.75-1.03l3.58-6.49A1 1 0 0023.43 4H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2S15.9 22 17 22s2-.9 2-2-.9-2-2-2z"/></svg><span class="cart-count" id="cartCount">0</span></button>
 <div class="toast" id="toast"></div>
 
@@ -292,8 +294,8 @@ let modalItem = null;
 
 // Category images mapping (unchanged)
 const categoryImages = {
-  Desserts: ['https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400', 'https://images.unsplash.com/photo-1563729784474-e77d69acf128?w=400', 'https://images.unsplash.com/photo-1578985545062-69928b1b958e?w=400', 'https://images.unsplash.com/photo-1587314168485-3236d6710814?w=400', 'https://images.unsplash.com/photo-1624353365286-3f8d62daad51?w=400', 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=400', 'https://images.unsplash.com/photo-1559617311-2cf1979e3cd1?w=400', 'https://images.unsplash.com/photo-1464305795204-6f5bbfc7fb81?w=400', 'https://images.unsplash.com/photo-1481391319762-47dff72954d9?w=400', 'https://images.unsplash.com/photo-1558301211-0d8c8ddee6ec?w=400', 'https://images.unsplash.com/photo-1571115177098-24ec42ed204d?w=400', 'https://images.unsplash.com/photo-1587668178277-295251f900ce?w=400', 'https://images.unsplash.com/photo-1603532648955-039310d9a75a?w=400', 'https://images.unsplash.com/photo-1562777717-dc6984f7c1c5?w=400', 'https://images.unsplash.com/photo-1486427944299-d1955d23e34d?w=400', 'https://images.unsplash.com/photo-1509365465985-25d11c17e812?w=400', 'https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=400', 'https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=400', 'https://images.unsplash.com/photo-1541783245831-57e6f092a82d?w=400', 'https://images.unsplash.com/photo-1585195838329-9d976e078a1e?w=400'],
-  ColdDrink: ['image/colddrink/colddrink1.jpg', 'image/colddrink/colddrink2.jpg', 'image/colddrink/colddrink3.jpg', 'image/colddrink/colddrink4.jpg', 'image/colddrink/colddrink5.jpg', 'image/colddrink/colddrink6.jpg', 'image/colddrink/colddrink7.jpg'],
+  Desserts: ['https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400', 'https://images.unsplash.com/photo-1563729784474-e77d69acf128?w=400', 'https://images.unsplash.com/photo-1578985545062-69928b1b958e?w=400', 'https://images.unsplash.com/photo-1587314168485-3236d6710814?w=400', 'https://images.unsplash.com/photo-1624353365286-3f8d62daad51?w=400', 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=400', 'https://images.unsplash.com/photo-1559617311-2cf1979e3cd1?w=400',],
+  ColdDrink: ['image/colddrink/colddrink1.jpg', 'image/colddrink/colddrink2.jpg', 'image/colddrink/colddrink3.jpg', 'image/colddrink/colddrink4.jpg', 'image/colddrink/colddrink5.jpg', 'image/colddrink/colddrink6.jpg', 'image/colddrink/colddrink7.jpg', 'image/colddrink/colddrink8.jpg', 'image/colddrink/colddrink9.jpg', 'image/colddrink/colddrink10.jpg', 'image/colddrink/colddrink11.jpg',  'image/colddrink/colddrink12.jpg',],
   'Hot Drinks': ['image/hotdrink/hotdrink1.jpg', 'image/hotdrink/hotdrink2.jpg', 'image/hotdrink/hotdrink3.jpg', 'image/hotdrink/hotdrink4.jpg', 'image/hotdrink/hotdrink5.jpg', 'image/hotdrink/hotdrink6.jpg', 'image/hotdrink/hotdrink7.jpg', 'image/hotdrink/hotdrink8.jpg', 'image/hotdrink/hotdrink9.jpg', 'image/hotdrink/hotdrink10.jpg', 'image/hotdrink/hotdrink11.jpg', 'image/hotdrink/hotdrink12.jpg', 'image/hotdrink/hotdrink13.jpg', 'image/hotdrink/hotdrink14.jpg', 'image/hotdrink/hotdrink15.jpg', 'image/hotdrink/hotdrink16.jpg',  ],
   Cakes: ['image/cake/cake1.jpg', 'image/cake/cake2.jpg', 'image/cake/cake3.jpg', 'image/cake/cake4.jpg', 'image/cake/cake5.jpg', 'image/cake/cake6.jpg', 'image/cake/cake7.jpg', 'image/cake/cake8.jpg', 'image/cake/cake9.jpg', 'image/cake/cake10.jpg', 'image/cake/cake11.jpg', 'image/cake/cake12.jpg', 'image/cake/cake13.jpg', 'image/cake/cake14.jpg'],
   Smothy: ['image/smoothie/smoothie1.jpg', 'image/smoothie/smoothie2.jpg', 'image/smoothie/smoothie3.jpg', 'image/smoothie/smoothie4.jpg', 'image/smoothie/smoothie5.jpg', 'image/smoothie/smoothie6.jpg'],
@@ -319,7 +321,7 @@ function generateSampleProducts() {
   
   const nameTrMap = {
     Desserts: ['Tiramisu', 'Cheesecake', 'Panna Cotta', 'Sufle', 'Profiterol', 'Trileçe', 'Kazandibi', 'Sütlaç', 'Güllaç', 'Baklava', 'Magnolia', 'Trüf', 'Paris Bistro', 'Mousse', 'Tart', 'Puding', 'Revani', 'Şekerpare', 'Kalp Şekeri', 'Meyve Tabagi'],
-    ColdDrink: ['Kola', 'Fanta', 'Sprite', 'White Tiger', 'Smart', 'Redbull', 'Freez'],
+    ColdDrink: ['Kola', 'Fanta', 'Sprite', 'White Tiger', 'Smart', 'Redbull', 'Freez', 'Ice Coffee Americano', 'Ice Spanish Latte', 'Iced Mocha', 'Iced White Mocha', 'Ice Chocolate',  ],
     'Hot Drinks': ['Pistachio Coffe', 'Oreo Coffe', 'Flat White Coffe', 'turk Coffe', 'Mocha Coffee', 'Cortado Coffe', 'Spanish Latte Coffe', 'White Mocha Coffee', 'Arabic Coffee', 'Avocado Coffe', 'Tea', 'Americano Coffee', 'Espresso Double Coffe', 'Espresso Single Coffe', 'France Coffe', 'Hot Chocolate',  ],
     Cakes: ['Tramisu', 'ibiza', 'islak kek', 'Macaron', 'Ekler', 'Revani', 'Tralice', 'Sansebistian', 'lotus cizkek', 'Redwelet', 'Russi', 'çikolatalik cizkek', 'Cocostar'],
     Smothy: ['mnka Smoothie', 'Strawberry Smoothie', 'Lichi Smoothie', 'Bluewberry Mersini', 'Ananas Smoothie', 'Banana Smoothie'],
@@ -334,7 +336,7 @@ function generateSampleProducts() {
   
   const nameKuMap = {
     Desserts: ['Tîramîsû', 'Cheesecake', 'Panna Cotta', 'Soufflé', 'Profiterol', 'Trileçe', 'Kazandibi', 'Sûtlac', 'Gûllaç', 'Beqlawa', 'Magnolia', 'Trüf', 'Paris Bistro', 'Mousse', 'Tart', 'Puding', 'Revani', 'Şekerpare', 'Kalp Şekeri', 'Meyve Tabagi'],
-    ColdDrink: ['کوکا کولا', 'فانتا', 'سپرایت', 'وایت تایگر', 'سمارت', 'رێد بوول', 'فریز'],
+    ColdDrink: ['کوکا کولا', 'فانتا', 'سپرایت', 'وایت تایگر', 'سمارت', 'رێد بوول', 'فریز', 'ایس کۆفی آمریکانو', 'ایس اسپانیش لاتێ', 'ایس مۆچا', 'ایس وایت مۆچا', 'ایس چوکلێت',],
     'Hot Drinks': ['قەهوە فستەق', ' وریو کوفی', 'فلات وایت کوفی', 'تورک کوفی', 'موکا کوفی', 'کورتادو کوفی', 'سپانێش لاتێ کوفی', 'وایت موکا کوفی', 'عەرەبی کوفی', 'اڤوگادو کوفی', 'چا', 'امریکانو کوفی', 'اسپرێسو دەبل کوفی', 'اسپریسو سینگل کوفی', 'فرەنسی کوفی', 'هوت چوکلێت', ],
     Cakes: ['ترامیسو', 'یبیزا', 'یسلاک کێک', 'ماکارون', 'اکلەر', 'ریڤانی', 'ترالیچە', 'سانسێبیستیان', 'لوتوس کێک', 'رێدوالێت', 'رووسی', 'چوکلێت كێک', 'کوکوستار'],
     Smothy: ['Smoothie Mango', 'Smoothie Tûerd', 'Smoothie Mûz', 'Smoothie Tûrşîn', 'Smoothie Ananas', 'Smoothie Keskes', 'Smoothie Xox', 'Smoothie Kîwî', 'Smoothie Böğürtlen', 'Fêkî Têkel', 'Porteqal', 'Sêv', 'Zebeş', 'Giwêz', 'Mûz Çîkolata', 'Tûerd Mûz', 'Mango Hindistan', 'Frambuaz', 'Şîr Badem', 'Smoothie Protein'],
@@ -351,7 +353,7 @@ function generateSampleProducts() {
   // You can add/remove prices, just ensure each name has a matching price.
   const priceRanges = {
     Desserts: [8500, 9500, 10500, 7500, 8900, 9900, 6900, 7900, 8900, 12500, 11500, 9500, 13500, 14500, 8500, 7500, 6500, 5500, 4500, 6500],
-    ColdDrink: [2500, 2500, 2500, 2000, 3000, 3500, 2000],
+    ColdDrink: [1000, 1000, 1000, 1000, 1000, 1000, 1000, 3000, 3000, 3000, 3000, 3000, ],
     'Hot Drinks': [3000, 3000, 3000, 2000, 3000, 3000, 3000, 3000, 2000, 4000, 500, 3000, 3000, 3000, 3000, 3000, 3500, ],
     Cakes: [2000, 3000, 1500, 500, 500, 1500, 1000, 3000, 2000, 2000, 2000, 2000],
     Smothy: [4000, 4000, 4000, 4000, 4000, 4000],
@@ -360,7 +362,7 @@ function generateSampleProducts() {
     Organicjuice: [3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 4000, ],
     Conafe: [9500, 10500, 10500, 11500, 12500, 11000, 11500, 12000, 10000, 9500, 10500, 11000, 11500, 12000, 12500, 13000, 13500, 14000, 14500, 15000],
     Milkshake: [3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000],
-    Icecream: [4000, 4500, 4500, 5000, 5500, 5000, 4500, 5000, 5500, 6000, 5500, 6000, 6500, 7000, 7500, 8000, 8500, 9000, 9500, 10000],
+    Icecream: [500, 500, 500, 500, 500, 500, 500, 1000, 1000, ],
     Baklava: [12000, 13000, 14000, 15000, 16000, 17000, 14000, 14500, 13500, 12500, 13000, 13500, 14000, 14500, 15000, 15500, 16000, 16500, 17000, 17500]
   };
 
@@ -380,8 +382,8 @@ function generateSampleProducts() {
         nameKu: namesKu[i],
         price: prices[i],
         img: images[imgIndex],
-        descTr: `Lezzetli ${namesTr[i]} - Özel tarifimizle hazırlanmıştır.`,
-        descKu: `${namesKu[i]} - Bi reçeteya taybet hate hazirkirin.`
+      //  descTr: `Lezzetli ${namesTr[i]} - Özel tarifimizle hazırlanmıştır.`,
+      //  descKu: `${namesKu[i]} - Bi reçeteya taybet hate hazirkirin.`
       });
     }
   }
@@ -434,7 +436,7 @@ function updateUILang() {
   document.getElementById('labelRequests').textContent = translateText('labelRequests', 'Special Requests'); 
   document.getElementById('submitReserveBtn').textContent = translateText('confirmBtn', 'Confirm Reservation'); 
   document.getElementById('searchInput').placeholder = translateText('searchPlaceholder', 'Search dishes...'); 
-  const langLabel = currentLang === 'tr' ? 'English ▾' : 'کوردی ▾'; 
+  const langLabel = currentLang === 'tr' ? 'Türkçe ▾' : 'کوردی ▾'; 
   document.getElementById('globalLangLabel').textContent = langLabel; 
   document.getElementById('menuLangLabel').textContent = langLabel; 
   document.getElementById('menuBtnLanding').innerHTML = currentLang === 'tr' ? 'Menü' : 'مینیو'; 
