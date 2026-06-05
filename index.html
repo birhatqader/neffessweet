@@ -283,8 +283,8 @@
 // Simply adjust the 'priceRanges' arrays below — each price pairs with the product name at same index.
 
 const translations = {
-  tr: { menuTitle:"Nefes Sweets", reserveTitle:"Masa Rezervasyonu", labelName:"Ad Soyad", labelPhone:"Telefon Numarası", labelDate:"Tarih", labelTime:"Saat", labelGuests:"Misafir Sayısı", labelRequests:"Özel İstekler", confirmBtn:"Rezervasyon Onayla", searchPlaceholder:"Yemek ara...", cartToast:"Sepete eklendi ✓", reserveToast:"Rezervasyon onaylandı! 🎉", categories:{ Desserts:"VIP", ColdDrink:"Soğuk İçecekler", "Hot Drinks":"Sıcak İçecekler", Cakes:"Pastalar", Smothy:"Smoothie", Mohito:"Mojito", Creap:"Creap", Organicjuice:"Organik Meyve Suyu", Conafe:"Künefe", Milkshake:"Milk Shake", Icecream:"Dondurma", Baklava:"Baklava"} },
-  ku: { menuTitle:"Nefes Sweets", reserveTitle:"Mêze ve Destgirtin", labelName:"Navê Temam", labelPhone:"Jimareya Telefonê", labelDate:"Dîrok", labelTime:"Demjimêr", labelGuests:"Hejmara Mêvanan", labelRequests:"Daxwazên Taybet", confirmBtn:"Piştrastkirina Rezervasyonê", searchPlaceholder:"Lêgerîna xwarinan...", cartToast:"Hat zêdekirin ✓", reserveToast:"Rezervasyon hate piştrastkirin! 🎉", categories:{ Desserts:" VIP", ColdDrink:" ڤەخارنێت تەزی", "Hot Drinks":" ڤەخارنێت گەرم", Cakes:" کێک", Smothy:" سموزی", Mohito:" موهیتو", Creap:" کریپ", Organicjuice:" شەربەت طەبیعی", Conafe:" کونافە", Milkshake:" میلک شیک", Icecream:" اسکریم", Baklava:" بەقلاوە"} }
+  tr: { menuTitle:"NEFES SWEETS", reserveTitle:"Masa Rezervasyonu", labelName:"Ad Soyad", labelPhone:"Telefon Numarası", labelDate:"Tarih", labelTime:"Saat", labelGuests:"Misafir Sayısı", labelRequests:"Özel İstekler", confirmBtn:"Rezervasyon Onayla", searchPlaceholder:"Yemek ara...", cartToast:"Sepete eklendi ✓", reserveToast:"Rezervasyon onaylandı! 🎉", categories:{ Desserts:"VIP", ColdDrink:"Soğuk İçecekler", "Hot Drinks":"Sıcak İçecekler", Cakes:"Pastalar", Smothy:"Smoothie", Mohito:"Mojito", Creap:"Creap", Organicjuice:"Organik Meyve Suyu", Conafe:"Künefe", Milkshake:"Milk Shake", Icecream:"Dondurma", Baklava:"Baklava"} },
+  ku: { menuTitle:"نەفەس سویت", reserveTitle:"Mêze ve Destgirtin", labelName:"Navê Temam", labelPhone:"Jimareya Telefonê", labelDate:"Dîrok", labelTime:"Demjimêr", labelGuests:"Hejmara Mêvanan", labelRequests:"Daxwazên Taybet", confirmBtn:"Piştrastkirina Rezervasyonê", searchPlaceholder:"Lêgerîna xwarinan...", cartToast:"Hat zêdekirin ✓", reserveToast:"Rezervasyon hate piştrastkirin! 🎉", categories:{ Desserts:" VIP", ColdDrink:" ڤەخارنێت تەزی", "Hot Drinks":" ڤەخارنێت گەرم", Cakes:" کێک", Smothy:" سموزی", Mohito:" موهیتو", Creap:" کریپ", Organicjuice:" شەربەت طەبیعی", Conafe:" کونافە", Milkshake:" میلک شیک", Icecream:" اسکریم", Baklava:" بەقلاوە"} }
 };
 
 let currentLang = 'tr';
@@ -407,7 +407,7 @@ function translateText(key, fallback) { return (translations[currentLang]?.[key]
 function renderCategories() { 
   const el = document.getElementById('catScroll'); 
   const cats = translations[currentLang]?.categories || translations.tr.categories; 
-  el.innerHTML = categoriesList.map(c => `<div class="cat-item ${c.id===activeCat?'active':''}" onclick="selectCat('${c.id}')"><span class="menu-icon" style="font-size:28px; line-height:1;">${icons[c.icon] ? icons[c.icon] : '🍽️'}</span><span>${cats[c.id] || c.id}</span></div>`).join(''); 
+  el.innerHTML = categoriesList.map(c => `<div class="cat-item ${c.id===activeCat?'active':''}" onclick="selectCat('${c.id}')"><span class="menu-icon" style="font-size:px; line-height:1 font-weight: bold;">${icons[c.icon] ? icons[c.icon] : '🍽️'}</span><span>${cats[c.id] || c.id}</span></div>`).join(''); 
 }
 function selectCat(id) { activeCat = id; document.getElementById('searchInput').value = ''; renderMenu(); }
 function renderMenu() { renderCategories(); const filtered = dishesData.filter(d => d.cat === activeCat); renderGrid(filtered); }
