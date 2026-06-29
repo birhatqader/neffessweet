@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<title>KOCHAR Rest & Cafe – Zakho | Premium Menu</title>
+<title>NEFES SWEETS</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -284,18 +284,18 @@
 // Simply adjust the 'priceRanges' arrays below — each price pairs with the product name at same index.
 
 const translations = {
-  tr: { menuTitle:"NEFES SWEETS", reserveTitle:"Masa Rezervasyonu", labelName:"Ad Soyad", labelPhone:"Telefon Numarası", labelDate:"Tarih", labelTime:"Saat", labelGuests:"Misafir Sayısı", labelRequests:"Özel İstekler", confirmBtn:"Rezervasyon Onayla", searchPlaceholder:"Yemek ara...", cartToast:"Sepete eklendi ✓", reserveToast:"Rezervasyon onaylandı! 🎉", categories:{ Desserts:"VIP", ColdDrink:"Soğuk İçecekler", "Hot Drinks":"Sıcak İçecekler", Cakes:"Pastalar", Smothy:"Smoothie", Mohito:"Mojito", Creap:"Creap", Organicjuice:"Organik Meyve Suyu", Conafe:"Künefe", Milkshake:"Milk Shake", Icecream:"Dondurma", Baklava:"Baklava"} },
-  ku: { menuTitle:"نەفەس سویت", reserveTitle:"Mêze ve Destgirtin", labelName:"Navê Temam", labelPhone:"Jimareya Telefonê", labelDate:"Dîrok", labelTime:"Demjimêr", labelGuests:"Hejmara Mêvanan", labelRequests:"Daxwazên Taybet", confirmBtn:"Piştrastkirina Rezervasyonê", searchPlaceholder:"Lêgerîna xwarinan...", cartToast:"Hat zêdekirin ✓", reserveToast:"Rezervasyon hate piştrastkirin! 🎉", categories:{ Desserts:" VIP", ColdDrink:" ڤەخارنێت تەزی", "Hot Drinks":" ڤەخارنێت گەرم", Cakes:" کێک", Smothy:" سموزی", Mohito:" موهیتو", Creap:" کریپ", Organicjuice:" شەربەت طەبیعی", Conafe:" کونافە", Milkshake:" میلک شیک", Icecream:" اسکریم", Baklava:" بەقلاوە"} }
+  tr: { menuTitle:"NEFES SWEETS", reserveTitle:"Masa Rezervasyonu", labelName:"Ad Soyad", labelPhone:"Telefon Numarası", labelDate:"Tarih", labelTime:"Saat", labelGuests:"Misafir Sayısı", labelRequests:"Özel İstekler", confirmBtn:"Rezervasyon Onayla", searchPlaceholder:"Yemek ara...", cartToast:"Sepete eklendi ✓", reserveToast:"Rezervasyon onaylandı! 🎉", categories:{ VIP:"VIP", ColdDrink:"Soğuk İçecekler", "Hot Drinks":"Sıcak İçecekler", Cakes:"Pastalar", Smothy:"Smoothie", Mohito:"Mojito", Creap:"Creap", Organicjuice:"Organik Meyve Suyu", Conafe:"Künefe", Milkshake:"Milk Shake", Icecream:"Dondurma", Baklava:"Baklava"} },
+  ku: { menuTitle:"نەفەس سویت", reserveTitle:"Mêze ve Destgirtin", labelName:"Navê Temam", labelPhone:"Jimareya Telefonê", labelDate:"Dîrok", labelTime:"Demjimêr", labelGuests:"Hejmara Mêvanan", labelRequests:"Daxwazên Taybet", confirmBtn:"Piştrastkirina Rezervasyonê", searchPlaceholder:"Lêgerîna xwarinan...", cartToast:"Hat zêdekirin ✓", reserveToast:"Rezervasyon hate piştrastkirin! 🎉", categories:{ VIP:" VIP", ColdDrink:" ڤەخارنێت تەزی", "Hot Drinks":" ڤەخارنێت گەرم", Cakes:" کێک", Smothy:" سموزی", Mohito:" موهیتو", Creap:" کریپ", Organicjuice:" شەربەت طەبیعی", Conafe:" کونافە", Milkshake:" میلک شیک", Icecream:" اسکریم", Baklava:" بەقلاوە"} }
 };
 
 let currentLang = 'tr';
-let activeCat = 'Desserts';
+let activeCat = 'VIP';
 let cartCount = 0;
 let modalItem = null;
 
 // Category images mapping (unchanged)
 const categoryImages = {
-  Desserts: ['https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400', 'https://images.unsplash.com/photo-1563729784474-e77d69acf128?w=400', 'https://images.unsplash.com/photo-1578985545062-69928b1b958e?w=400', 'https://images.unsplash.com/photo-1587314168485-3236d6710814?w=400', 'https://images.unsplash.com/photo-1624353365286-3f8d62daad51?w=400', 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=400', 'https://images.unsplash.com/photo-1559617311-2cf1979e3cd1?w=400',],
+  VIP: [],
   ColdDrink: ['image/colddrink/colddrink1.jpg', 'image/colddrink/colddrink2.jpg', 'image/colddrink/colddrink3.jpg', 'image/colddrink/colddrink4.jpg', 'image/colddrink/colddrink5.jpg', 'image/colddrink/colddrink6.jpg', 'image/colddrink/colddrink7.jpg', 'image/colddrink/colddrink8.jpg', 'image/colddrink/colddrink9.jpg', 'image/colddrink/colddrink10.jpg', 'image/colddrink/colddrink11.jpg',  'image/colddrink/colddrink12.jpg',],
   'Hot Drinks': ['image/hotdrink/hotdrink1.jpg', 'image/hotdrink/hotdrink2.jpg', 'image/hotdrink/hotdrink3.jpg', 'image/hotdrink/hotdrink4.jpg', 'image/hotdrink/hotdrink5.jpg', 'image/hotdrink/hotdrink6.jpg', 'image/hotdrink/hotdrink7.jpg', 'image/hotdrink/hotdrink8.jpg', 'image/hotdrink/hotdrink9.jpg', 'image/hotdrink/hotdrink10.jpg', 'image/hotdrink/hotdrink11.jpg', 'image/hotdrink/hotdrink12.jpg', 'image/hotdrink/hotdrink13.jpg', 'image/hotdrink/hotdrink14.jpg', 'image/hotdrink/hotdrink15.jpg', 'image/hotdrink/hotdrink16.jpg',  ],
   Cakes: ['image/cake/cake1.jpg', 'image/cake/cake2.jpg', 'image/cake/cake3.jpg', 'image/cake/cake4.jpg', 'image/cake/cake5.jpg', 'image/cake/cake6.jpg', 'image/cake/cake7.jpg', 'image/cake/cake8.jpg', 'image/cake/cake9.jpg', 'image/cake/cake10.jpg', 'image/cake/cake11.jpg', 'image/cake/cake12.jpg', 'image/cake/cake13.jpg', 'image/cake/cake14.jpg'],
@@ -306,7 +306,7 @@ const categoryImages = {
   Conafe: ['image/conafe/1.jpg', 'image/conafe/2.jpg', 'image/conafe/3.jpg', 'image/conafe/4.jpg'],
   Milkshake: ['image/milkshake/milkshake1.jpg', 'image/milkshake/milkshake2.jpg', 'image/milkshake/milkshake3.jpg', 'image/milkshake/milkshake4.jpg', 'image/milkshake/milkshake5.jpg', 'image/milkshake/milkshake6.jpg', 'image/milkshake/milkshake7.jpg', 'image/milkshake/milkshake8.jpg', 'image/milkshake/milkshake9.jpg'],
   Icecream: ['image/icecrea/3.jpg', 'image/icecrea/4.jpg', 'image/icecrea/5.jpg', 'image/icecrea/6.jpg', 'image/icecrea/7.jpg', 'image/icecrea/8.jpg', 'image/icecrea/9.jpg', 'image/icecrea/1.jpg', 'image/icecrea/2.jpg'],
-  Baklava: ['https://images.unsplash.com/photo-1583121276075-5e5b6f20ac4d?w=400', 'https://images.unsplash.com/photo-1583525788810-2b0a2e5e0e2a?w=400', 'https://images.unsplash.com/photo-1563729784474-e77d69acf128?w=400', 'https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400', 'https://images.unsplash.com/photo-1578985545062-69928b1b958e?w=400', 'https://images.unsplash.com/photo-1587314168485-3236d6710814?w=400', 'https://images.unsplash.com/photo-1624353365286-3f8d62daad51?w=400', 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=400', 'https://images.unsplash.com/photo-1559617311-2cf1979e3cd1?w=400', 'https://images.unsplash.com/photo-1464305795204-6f5bbfc7fb81?w=400', 'https://images.unsplash.com/photo-1481391319762-47dff72954d9?w=400', 'https://images.unsplash.com/photo-1558301211-0d8c8ddee6ec?w=400', 'https://images.unsplash.com/photo-1571115177098-24ec42ed204d?w=400', 'https://images.unsplash.com/photo-1587668178277-295251f900ce?w=400', 'https://images.unsplash.com/photo-1603532648955-039310d9a75a?w=400', 'https://images.unsplash.com/photo-1562777717-dc6984f7c1c5?w=400', 'https://images.unsplash.com/photo-1486427944299-d1955d23e34d?w=400', 'https://images.unsplash.com/photo-1509365465985-25d11c17e812?w=400', 'https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=400', 'https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=400']
+  Baklava: ['image/baklava/1.jpg', 'image/baklava/2.jpg', 'image/baklava/3.jpg', 'image/baklava/4.jpg', 'image/baklava/5.jpg']
 };
 
 // ----- PRICE EDITING MADE EASY: EXACTLY 1 product per name (no fixed 20 items) -----
@@ -318,42 +318,42 @@ const categoryImages = {
 function generateSampleProducts() {
   const products = [];
   let pid = 1;
-  const categories = ['Desserts', 'ColdDrink', 'Hot Drinks', 'Cakes', 'Smothy', 'Mohito', 'Creap', 'Organicjuice', 'Conafe', 'Milkshake', 'Icecream', 'Baklava'];
+  const categories = ['VIP', 'ColdDrink', 'Hot Drinks', 'Cakes', 'Smothy', 'Mohito', 'Creap', 'Organicjuice', 'Conafe', 'Milkshake', 'Icecream', 'Baklava'];
   
   const nameTrMap = {
-    Desserts: ['Tiramisu', 'Cheesecake', 'Panna Cotta', 'Sufle', 'Profiterol', 'Trileçe', 'Kazandibi', 'Sütlaç', 'Güllaç', 'Baklava', 'Magnolia', 'Trüf', 'Paris Bistro', 'Mousse', 'Tart', 'Puding', 'Revani', 'Şekerpare', 'Kalp Şekeri', 'Meyve Tabagi'],
+    VIP: [],
     ColdDrink: ['Kola', 'Fanta', 'Sprite', 'White Tiger', 'Smart', 'Redbull', 'Freez', 'Ice Coffee Americano', 'Ice Spanish Latte', 'Iced Mocha', 'Iced White Mocha', 'Ice Chocolate',  ],
     'Hot Drinks': ['Pistachio Coffe', 'Oreo Coffe', 'Flat White Coffe', 'turk Coffe', 'Mocha Coffee', 'Cortado Coffe', 'Spanish Latte Coffe', 'White Mocha Coffee', 'Arabic Coffee', 'Avocado Coffe', 'Tea', 'Americano Coffee', 'Espresso Double Coffe', 'Espresso Single Coffe', 'France Coffe', 'Hot Chocolate',  ],
     Cakes: ['Tramisu', 'ibiza', 'islak kek', 'Macaron', 'Ekler', 'Revani', 'Tralice', 'Sansebistian', 'lotus cizkek', 'Redwelet', 'Russi', 'çikolatalik cizkek', 'Cocostar'],
-    Smothy: ['mnka Smoothie', 'Strawberry Smoothie', 'Lichi Smoothie', 'Bluewberry Mersini', 'Ananas Smoothie', 'Banana Smoothie'],
+    Smothy: ['Strawberry&Milk Smoothie', 'Strawberry Smoothie', 'Lichi Smoothie', 'Bluewberry Smoothie', 'Ananas Smoothie', 'Banana Smoothie'],
     Mohito: ['Lemon Mojito', 'Blue haway Mojito', 'Blackberry Mojito', 'Ananas Mojito', 'Coconut Mojito', 'Strawberry Mojito', 'Peach Mojito', 'rasberry Mojito', 'Pomegranate Mojito', 'Redbull Mojito', 'White Tiger Mojito'],
     Creap: ['Sushi Creap', 'Bueno Creap', 'Kinder Creap', 'Pistachio Creap', 'Lotus Creap', 'Nutilla Creap', 'Lotus Waffle', 'Pistachio Waffel', 'Nutilla Waffel', 'Burger Waffel', 'Bill Waffel', 'Nutilla Pankek', 'Oreo Pankek', 'Lotus Pankek', 'Pistachio Pankek'],
-    Organicjuice: ['Portakal Suyu', 'Elma Suyu', 'Havuç Suyu', 'Nar Suyu', 'Kivi Suyu', 'Greyfurt Suyu', 'Limonata', 'Karışık Sebze', 'Wheatgrass', ],
-    Conafe: ['Sade Konafe', 'Antep Fıstıklı', 'Cevizli Konafe', 'Bademli Konafe',],
+    Organicjuice: ['Orange Juice', 'Lemon Juice', 'Kiwi Juice', 'Strawberry Juice', 'Banana Juice', 'Ananas Juice', 'Kiwi&Lemon Juice', 'Pomegranate Juice', 'Avocado Juice', ],
+    Conafe: ['Pestatio Konafe', 'Mshekl Konafe', 'Kaymak Konafe', 'Penir Konafe',],
     Milkshake: ['Strawberry Milkshake', 'Blueberryv Milkshake', 'Kinder Milkshake', 'Oreo Milkshake', 'Nutilla Milkshake', 'Lotus Milkshake', 'Pistachio Milkshake', 'Keramel Milkshake', 'Chocolate Milkshake'],
-    Icecream: ['Vanilyalı', 'Çikolatalı', 'Çilekli', 'Muzlu', 'Fıstıklı', 'Karamelli', 'Limonlu', 'Frambuazlı', 'Bademli', ],
-    Baklava: ['Cevizli Baklava', 'Fıstıklı Baklava', 'Sütlü Baklava', 'Karamelli Baklava', 'Çikolatalı Baklava', 'Dondurmalı Baklava', 'Bademli Baklava', 'Fındıklı Baklava', 'Şerbetli Baklava', 'Klasik Baklava', 'Midye Baklava', 'Dilim Baklava', 'Kuru Baklava', 'Yaş Baklava', 'Antep Baklava', 'Şam Baklava', 'Havuç Dilim', 'Sarma Baklava', 'Burma Baklava', 'Kalburabastı']
+    Icecream: ['Muz Dundurma', 'Pestatio Dundurma ', 'Chikolata Dundurma', 'Bluberry Dundurma', 'Stawberry Dundurma', 'Mangu Dundurma', 'Limon Dundurma', 'Ezberi Portakal', 'Ezberi Bluberry&Strawberry', ],
+    Baklava: ['midye Baklava 1 Lb', 'sade Baklava 1 Lb', 'sarma Baklava 1 Lb', 'diber dodagi Baklava 1 Lb', 'duner Baklava 1 Lb', ]
   };
   
   const nameKuMap = {
-    Desserts: ['Tîramîsû', 'Cheesecake', 'Panna Cotta', 'Soufflé', 'Profiterol', 'Trileçe', 'Kazandibi', 'Sûtlac', 'Gûllaç', 'Beqlawa', 'Magnolia', 'Trüf', 'Paris Bistro', 'Mousse', 'Tart', 'Puding', 'Revani', 'Şekerpare', 'Kalp Şekeri', 'Meyve Tabagi'],
+    VIP: ['Tîramîsû', 'Cheesecake', 'Panna Cotta', 'Soufflé', 'Profiterol', 'Trileçe', 'Kazandibi', 'Sûtlac', 'Gûllaç', 'Beqlawa', 'Magnolia', 'Trüf', 'Paris Bistro', 'Mousse', 'Tart', 'Puding', 'Revani', 'Şekerpare', 'Kalp Şekeri', 'Meyve Tabagi'],
     ColdDrink: ['کوکا کولا', 'فانتا', 'سپرایت', 'وایت تایگر', 'سمارت', 'رێد بوول', 'فریز', 'ایس کۆفی آمریکانو', 'ایس اسپانیش لاتێ', 'ایس مۆچا', 'ایس وایت مۆچا', 'ایس چوکلێت',],
     'Hot Drinks': ['قەهوە فستەق', ' وریو کوفی', 'فلات وایت کوفی', 'تورک کوفی', 'موکا کوفی', 'کورتادو کوفی', 'سپانێش لاتێ کوفی', 'وایت موکا کوفی', 'عەرەبی کوفی', 'اڤوگادو کوفی', 'چا', 'امریکانو کوفی', 'اسپرێسو دەبل کوفی', 'اسپریسو سینگل کوفی', 'فرەنسی کوفی', 'هوت چوکلێت', ],
     Cakes: ['ترامیسو', 'یبیزا', 'یسلاک کێک', 'ماکارون', 'اکلەر', 'ریڤانی', 'ترالیچە', 'سانسێبیستیان', 'لوتوس کێک', 'رێدوالێت', 'رووسی', 'چوکلێت كێک', 'کوکوستار'],
-    Smothy: ['Smoothie Mango', 'Smoothie Tûerd', 'Smoothie Mûz', 'Smoothie Tûrşîn', 'Smoothie Ananas', 'Smoothie Keskes', 'Smoothie Xox', 'Smoothie Kîwî', 'Smoothie Böğürtlen', 'Fêkî Têkel', 'Porteqal', 'Sêv', 'Zebeş', 'Giwêz', 'Mûz Çîkolata', 'Tûerd Mûz', 'Mango Hindistan', 'Frambuaz', 'Şîr Badem', 'Smoothie Protein'],
+    Smothy: ['سموزی فراولە و موز', 'سموزی فراولە', 'سموزی لیچی', 'سموزی بلوبێری', 'سموزی اناناس', 'سموزی موز', ],
     Mohito: ['موهیتو لیمون', 'موهیتو بلو هاوای', 'موهیتو بلاک بێری', 'موهیتو انەناس', 'موهیتو گیز', 'موهیتو فراولە', 'موهیتو خوخ', 'موهیتو راسبێری', 'موهیتو هنار', 'موهیتو رێدبول', 'موهیتو وایت تایگەر'],
     Creap: ['کریپ سوشی', 'کریپ بوینو', 'کریپ کیندەر', 'کریپ فستەق', 'کریپ لوتوس', 'کریپ نوتێلا', 'وافل لوتوس', 'وافل فستەق', 'وافل نوتێلا', 'وافل بورگەر', 'وافل بێل', 'پانکێک نوتێلا', 'پانکێک وریو', 'پانکێک لوتوس', 'پانکێک فستەق'],
-    Organicjuice: ['Ava Porteqal', 'Ava Sêv', 'Ava Gêzer', 'Ava Hinar', 'Ava Kîwî', 'Ava Greypfruit', 'Lîmonata', 'Sebze Têkel', 'Wheatgrass', ],
-    Conafe: ['Kunefe Sade', 'Kunefe Fistiq', 'Kunefe Gûz', 'Kunefe Badem', ],
+    Organicjuice: ['شەربەت پرتەقال', 'شەربەت لیمون', 'شەربەت کیوی', 'شەربەت فراولە', 'شەربەت موز', 'شەربەت اناناس', 'شەربەت کیوی&لیمون', 'شەربەت هنار', 'شەربەت اڤوگادو', ],
+    Conafe: ['کونافە فستەق', 'کونافە مشەکل', 'کونافە قەیماخ', 'کونافە پەنیر', ],
     Milkshake: ['فراولە میلکشێک', 'بلوبێری میلکشێک', 'کیندەر میلکشێک', 'وریو میلکشێک', 'نوتێلا میلکشێک', 'لوتوس میلکشێک', 'فستەق میلکشێک', 'کەرامێل میلکشێک', 'چوکلێت میلکشێک'],
-    Icecream: ['Vanîlya', 'Çîkolata', 'Tûerd', 'Mûz', 'Fistiq', 'Karamel', 'Lîmon', 'Frambuaz', 'Badem', ],
-    Baklava: ['Beqlawa Gûz', 'Beqlawa Fistiq', 'Beqlawa Şîr', 'Beqlawa Karamel', 'Beqlawa Çîkolata', 'Beqlawa Dondurma', 'Beqlawa Badem', 'Beqlawa Findiq', 'Beqlawa Şerbet', 'Beqlawa Klasîk', 'Beqlawa Midye', 'Beqlawa Dilim', 'Beqlawa Ziwa', 'Beqlawa Ter', 'Beqlawa Antep', 'Beqlawa Şam', 'Beqlawa Gêzer', 'Beqlawa Sarma', 'Beqlawa Burm', 'Kalburabastı']
+    Icecream: ['دودرما موز', 'دودرما فستەقێ', 'دودرما چیکولاتا', 'دودرما بلوبێری', 'دودرما فراولە', 'دودرما مانگو', 'دودرما لێمون', 'ازبەری پرتەقال', 'ازبەری بلوفێری&فراولە', ],
+    Baklava: ['میدیا بەقلاوە 1 لب', 'سادە بەقلاوە 1 لب', 'سارما بەقلاوە 1 لب', 'دیلبەر دۆداێ بەقلاوە 1 لب', 'دونەر بەقلاوە 1 لب', ]
   };
 
   // 🔽🔽🔽 EDIT PRICES: Each price corresponds to the product with same index in the name array.
   // You can add/remove prices, just ensure each name has a matching price.
   const priceRanges = {
-    Desserts: [8500, 9500, 10500, 7500, 8900, 9900, 6900, 7900, 8900, 12500, 11500, 9500, 13500, 14500, 8500, 7500, 6500, 5500, 4500, 6500],
+    VIP: [8500, 9500, 10500, 7500, 8900, 9900, 6900, 7900, 8900, 12500, 11500, 9500, 13500, 14500, 8500, 7500, 6500, 5500, 4500, 6500],
     ColdDrink: [1000, 1000, 1000, 1000, 1000, 1000, 1000, 3000, 3000, 3000, 3000, 3000, ],
     'Hot Drinks': [3000, 3000, 3000, 2000, 3000, 3000, 3000, 3000, 2000, 4000, 500, 3000, 3000, 3000, 3000, 3000, 3500, ],
     Cakes: [2000, 3000, 1500, 500, 500, 1500, 1000, 3000, 2000, 2000, 2000, 2000],
@@ -361,10 +361,10 @@ function generateSampleProducts() {
     Mohito: [3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 4000, 4000],
     Creap: [5000, 5000, 5000, 5000, 5000, 9000, 5000, 5000, 5000, 5000, 4000, 4000, 5000, 5000, 5000],
     Organicjuice: [3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 4000, ],
-    Conafe: [9500, 10500, 10500, 11500, 12500, 11000, 11500, 12000, 10000, 9500, 10500, 11000, 11500, 12000, 12500, 13000, 13500, 14000, 14500, 15000],
+    Conafe: [8000, 5000, 10500, 11500, 12500, 11000, 11500, 12000, 10000, 9500, 10500, 11000, 11500, 12000, 12500, 13000, 13500, 14000, 14500, 15000],
     Milkshake: [3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000],
     Icecream: [500, 500, 500, 500, 500, 500, 500, 1000, 1000, ],
-    Baklava: [12000, 13000, 14000, 15000, 16000, 17000, 14000, 14500, 13500, 12500, 13000, 13500, 14000, 14500, 15000, 15500, 16000, 16500, 17000, 17500]
+    Baklava: [1000, 1000, 1000, 1000, 1000 ]
   };
 
   for (const cat of categories) {
@@ -396,7 +396,7 @@ let dishesData = generateSampleProducts();
 const icons = { Dessert: `<img src="image/crown.png" alt="Dessert" class="menu-icon" onerror="this.style.display='none'">`, ColdDrink: `<img src="image/drink.png" alt="Drink" class="menu-icon" onerror="this.style.display='none'">`, HotDrinks: `<img src="image/coffee-cup.png" alt="Coffee" class="menu-icon" onerror="this.style.display='none'">`, Cakes: `<img src="image/cake.png" alt="Cake" class="menu-icon" onerror="this.style.display='none'">`, Smothy: `<img src="image/smoothie.png" alt="Smoothie" class="menu-icon" onerror="this.style.display='none'">`, Mohito: `<img src="image/mojito.png" alt="Mohito" class="menu-icon" onerror="this.style.display='none'">`, Creap: `<img src="image/crepe.png" alt="Creap" class="menu-icon" onerror="this.style.display='none'">`, Organicjuice: `<img src="image/orange-juice.png" alt="Organic Juice" class="menu-icon" onerror="this.style.display='none'">`, Conafe: `<img src="image/kunafa.png" alt="Conafe" class="menu-icon" onerror="this.style.display='none'">`, Milkshake: `<img src="image/milk-shake.png" alt="Milkshake" class="menu-icon" onerror="this.style.display='none'">`, Icecream: `<img src="image/ice-cream.png" alt="Ice Cream" class="menu-icon" onerror="this.style.display='none'">`, Baklava: `<img src="image/baklava.png" alt="Baklava" class="menu-icon" onerror="this.style.display='none'">` };
 
 const categoriesList = [
-  { id: 'Desserts', icon: 'Dessert' }, { id: 'ColdDrink', icon: 'ColdDrink' }, { id: 'Hot Drinks', icon: 'HotDrinks' }, { id: 'Cakes', icon: 'Cakes' },
+  { id: 'VIP', icon: 'Dessert' }, { id: 'ColdDrink', icon: 'ColdDrink' }, { id: 'Hot Drinks', icon: 'HotDrinks' }, { id: 'Cakes', icon: 'Cakes' },
   { id: 'Smothy', icon: 'Smothy' }, { id: 'Mohito', icon: 'Mohito' }, { id: 'Creap', icon: 'Creap' }, { id: 'Organicjuice', icon: 'Organicjuice' },
   { id: 'Conafe', icon: 'Conafe' }, { id: 'Milkshake', icon: 'Milkshake' }, { id: 'Icecream', icon: 'Icecream' }, { id: 'Baklava', icon: 'Baklava' }
 ];
@@ -414,7 +414,7 @@ function selectCat(id) { activeCat = id; document.getElementById('searchInput').
 function renderMenu() { renderCategories(); const filtered = dishesData.filter(d => d.cat === activeCat); renderGrid(filtered); }
 function renderGrid(items) { 
   const grid = document.getElementById('foodGrid'); 
-  if (items.length === 0) { grid.innerHTML = `<div class="empty-state"><span class="icon">🍽️</span><p>Bu kategoride ürün yok</p></div>`; return; } 
+  if (items.length === 0) { grid.innerHTML = `<div class="empty-state"><span class="icon">🍰</span><p>لڤان نێزیکا</p></div>`; return; } 
   grid.innerHTML = items.map(d => `<div class="food-card" onclick="openModal(${d.id})"><img src="${d.img}" alt="${getDishName(d)}" loading="lazy"><div class="card-body"><div class="dish-name">${getDishName(d)}</div><div class="dish-price">${d.price.toLocaleString()} IQD</div></div></div>`).join(''); 
 }
 function filterDishes(q) { if (!q) { renderMenu(); return; } const filtered = dishesData.filter(d => getDishName(d).toLowerCase().includes(q.toLowerCase()) || getDishDesc(d).toLowerCase().includes(q.toLowerCase())); renderGrid(filtered); }
