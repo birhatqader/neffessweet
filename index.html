@@ -245,7 +245,7 @@
         <div class="modal-name" id="modalName"></div>
         <div class="modal-price" id="modalPrice"></div>
         <div class="modal-desc" id="modalDesc"></div>
-        <button class="modal-add" onclick="addToCartFromModal()">Sepete Ekle</button>
+       
       </div>
     </div>
   </div>
@@ -255,8 +255,8 @@
   <script>
     // ---------- TRANSLATIONS ----------
     const translations = {
-      tr: { menuTitle:"NEFES SWEETS · VIP", reserveTitle:"Masa Rezervasyonu", labelName:"Ad Soyad", labelPhone:"Telefon Numarası", labelDate:"Tarih", labelTime:"Saat", labelGuests:"Misafir Sayısı", labelRequests:"Özel İstekler", confirmBtn:"Rezervasyon Onayla", searchPlaceholder:"Yemek ara...", cartToast:"Sepete eklendi ✓", reserveToast:"Rezervasyon onaylandı! 🎉", categories:{ VIP:"VIP", ColdDrink:"Soğuk İçecekler", "Hot Drinks":"Sıcak İçecekler", Cakes:"Pastalar", Smothy:"Smoothie", Mohito:"Mojito", Creap:"Creap", Organicjuice:"Organik Meyve Suyu", Conafe:"Künefe", Milkshake:"Milk Shake", Icecream:"Dondurma", Baklava:"Baklava"} },
-      ku: { menuTitle:"نەفەس سویت · ڤیپ", reserveTitle:"Mêze ve Destgirtin", labelName:"Navê Temam", labelPhone:"Jimareya Telefonê", labelDate:"Dîrok", labelTime:"Demjimêr", labelGuests:"Hejmara Mêvanan", labelRequests:"Daxwazên Taybet", confirmBtn:"Piştrastkirina Rezervasyonê", searchPlaceholder:"Lêgerîna xwarinan...", cartToast:"Hat zêdekirin ✓", reserveToast:"Rezervasyon hate piştrastkirin! 🎉", categories:{ VIP:" ڤیپ", ColdDrink:"ڤەخارنێت تەزی", "Hot Drinks":"ڤەخارنێت گەرم", Cakes:"کێک", Smothy:"سموزی", Mohito:"موهیتو", Creap:"کریپ", Organicjuice:"شەربەت طەبیعی", Conafe:"کونافە", Milkshake:"میلک شیک", Icecream:"اسکریم", Baklava:"بەقلاوە"} }
+      tr: { menuTitle:"NEFES SWEETS ", reserveToast:"Rezervasyon onaylandı! 🎉", categories:{ VIP:"VIP", ColdDrink:"Soğuk İçecekler", "Hot Drinks":"Sıcak İçecekler", Cakes:"Pastalar", Smothy:"Smoothie", Mohito:"Mojito", Creap:"Creap", Organicjuice:"Organik Meyve Suyu", Conafe:"Künefe", Milkshake:"Milk Shake", Icecream:"Dondurma", Baklava:"Baklava"} },
+      ku: { menuTitle:"نەفەس سویت", reserveToast:"Rezervasyon hate piştrastkirin! 🎉", categories:{ VIP:" ڤیپ", ColdDrink:"ڤەخارنێت تەزی", "Hot Drinks":"ڤەخارنێت گەرم", Cakes:"کێک", Smothy:"سموزی", Mohito:"موهیتو", Creap:"کریپ", Organicjuice:"شەربەت طەبیعی", Conafe:"کونافە", Milkshake:"میلک شیک", Icecream:"اسکریم", Baklava:"بەقلاوە"} }
     };
 
     let currentLang = 'tr';
@@ -332,7 +332,7 @@
       };
 
       // VIP video items
-      const vipVideoCount = 8;
+      const vipVideoCount = 7;
       const vipImages = categoryImages.VIP;
       for (let i = 0; i < vipVideoCount; i++) {
         const imgIndex = i % vipImages.length;
