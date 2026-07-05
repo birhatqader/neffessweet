@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>NEFES SWEETS · VIP</title>
+  <title>NEFES SWEETS</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -161,14 +161,6 @@
       0%, 100% { opacity: 0.5; }
       50% { opacity: 1; }
     }
-    /* dessert emoji icons for each category */
-    .skeleton-icon-cake:before { content: ""; }
-    .skeleton-icon-cupcake:before { content: ""; }
-    .skeleton-icon-donut:before { content: ""; }
-    .skeleton-icon-cookie:before { content: ""; }
-    .skeleton-icon-icecream:before { content: ""; }
-    .skeleton-icon-chocolate:before { content: ""; }
-    /* random icon assignment via JS */
   </style>
 </head>
 <body>
@@ -205,7 +197,7 @@
     <div class="menu-header">
       <div class="menu-header-top">
         <button class="back-btn" onclick="showScreen('landing')"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg></button>
-        <span class="menu-title" id="menuTitle">NEFES SWEETS · VIP</span>
+        <span class="menu-title" id="menuTitle">NEFES SWEETS</span>
       </div>
       <div class="lang-bar" id="menuLangBar">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg>
@@ -255,8 +247,8 @@
   <script>
     // ---------- TRANSLATIONS ----------
     const translations = {
-      tr: { menuTitle:"NEFES SWEETS ", reserveToast:"Rezervasyon onaylandı! 🎉", categories:{ VIP:"VIP", ColdDrink:"Soğuk İçecekler", "Hot Drinks":"Sıcak İçecekler", Cakes:"Pastalar", Smothy:"Smoothie", Mohito:"Mojito", Creap:"Creap", Organicjuice:"Organik Meyve Suyu", Conafe:"Künefe", Milkshake:"Milk Shake", Icecream:"Dondurma", Baklava:"Baklava"} },
-      ku: { menuTitle:"نەفەس سویت", reserveToast:"Rezervasyon hate piştrastkirin! 🎉", categories:{ VIP:" ڤیپ", ColdDrink:"ڤەخارنێت تەزی", "Hot Drinks":"ڤەخارنێت گەرم", Cakes:"کێک", Smothy:"سموزی", Mohito:"موهیتو", Creap:"کریپ", Organicjuice:"شەربەت طەبیعی", Conafe:"کونافە", Milkshake:"میلک شیک", Icecream:"اسکریم", Baklava:"بەقلاوە"} }
+      tr: { menuTitle:"NEFES SWEETS ", categories:{ VIP:"VIP", ColdDrink:"Soğuk İçecekler", "Hot Drinks":"Sıcak İçecekler", Cakes:"Pastalar", Smothy:"Smoothie", Mohito:"Mojito", Creap:"Creap", Organicjuice:"Organik Meyve Suyu", Conafe:"Künefe", Milkshake:"Milk Shake", Icecream:"Dondurma", Baklava:"Baklava"} },
+      ku: { menuTitle:"نەفەس سویت",  categories:{ VIP:" ڤیپ", ColdDrink:"ڤەخارنێت تەزی", "Hot Drinks":"ڤەخارنێت گەرم", Cakes:"کێک", Smothy:"سموزی", Mohito:"موهیتو", Creap:"کریپ", Organicjuice:"شەربەت طەبیعی", Conafe:"کونافە", Milkshake:"میلک شیک", Icecream:"اسکریم", Baklava:"بەقلاوە"} }
     };
 
     let currentLang = 'tr';
@@ -267,7 +259,7 @@
 
     // ---------- CATEGORY IMAGES (VIP uses video files) ----------
     const categoryImages = {
-      VIP: ['video/1.MOV', 'video/2.MOV', 'video/3.MOV','video/5.MOV', 'video/6.MOV', 'video/7.MOV', 'video/8.MOV'],
+      VIP: ['video/1.MOV', 'video/2.MOV', 'video/3.MOV', 'video/4.mp4', 'video/5.MOV', 'video/6.MOV', 'video/7.MOV', 'video/8.MOV'],
       ColdDrink: ['image/colddrink/colddrink1.jpg', 'image/colddrink/colddrink2.jpg', 'image/colddrink/colddrink3.jpg', 'image/colddrink/colddrink4.jpg', 'image/colddrink/colddrink5.jpg', 'image/colddrink/colddrink6.jpg', 'image/colddrink/colddrink7.jpg', 'image/colddrink/colddrink8.jpg', 'image/colddrink/colddrink9.jpg', 'image/colddrink/colddrink10.jpg', 'image/colddrink/colddrink11.jpg', 'image/colddrink/colddrink12.jpg', 'image/colddrink/colddrink13.jpg'],
       'Hot Drinks': ['image/hotdrink/hotdrink1.jpg', 'image/hotdrink/hotdrink2.jpg', 'image/hotdrink/hotdrink3.jpg', 'image/hotdrink/hotdrink4.jpg', 'image/hotdrink/hotdrink5.jpg', 'image/hotdrink/hotdrink6.jpg', 'image/hotdrink/hotdrink7.jpg', 'image/hotdrink/hotdrink8.jpg', 'image/hotdrink/hotdrink9.jpg', 'image/hotdrink/hotdrink10.jpg', 'image/hotdrink/hotdrink11.jpg', 'image/hotdrink/hotdrink12.jpg', 'image/hotdrink/hotdrink13.jpg', 'image/hotdrink/hotdrink14.jpg', 'image/hotdrink/hotdrink15.jpg', 'image/hotdrink/hotdrink16.jpg'],
       Cakes: ['image/cake/cake1.jpg', 'image/cake/cake2.jpg', 'image/cake/cake3.jpg', 'image/cake/cake4.jpg', 'image/cake/cake5.jpg', 'image/cake/cake6.jpg', 'image/cake/cake7.jpg', 'image/cake/cake8.jpg', 'image/cake/cake9.jpg', 'image/cake/cake10.jpg', 'image/cake/cake11.jpg', 'image/cake/cake12.jpg', 'image/cake/cake14.jpg', 'image/cake/cake15.jpg', 'image/cake/cake16.jpg', 'image/cake/cake17.jpg', 'image/cake/cake18.jpg', 'image/cake/cake19.jpg', 'image/cake/cake20.jpg', 'image/cake/cake21.jpg', 'image/cake/cake22.jpg', 'image/cake/cake23.jpg', 'image/cake/cake24.jpg', 'image/cake/cake25.jpg', 'image/cake/cake26.jpg'],
@@ -332,7 +324,7 @@
       };
 
       // VIP video items
-      const vipVideoCount = 7;
+      const vipVideoCount = 8;
       const vipImages = categoryImages.VIP;
       for (let i = 0; i < vipVideoCount; i++) {
         const imgIndex = i % vipImages.length;
@@ -433,7 +425,7 @@
     }
 
     // DESSERT-THEMED SKELETON LOADING
-    const dessertIcons = ['🍰', '🧁', '🍩', '🍪', '🍦', '🍫', '🥧', '🎂', '🍭', '🍬', '🍮', '🧇'];
+    const dessertIcons = ['🍰', '🍰', '🍰', '🍰', '🍰', '🍰', '🍰', '🍰', '🍰', '🍰', '🍰', '🍰'];
 
     function renderSkeletons(count) {
       let html = '';
@@ -454,6 +446,47 @@
       return html;
     }
 
+    // Function to auto-play videos in the grid
+    function setupVideoPlayers() {
+      document.querySelectorAll('.food-card video').forEach(video => {
+        // Try to play the video
+        const playVideo = () => {
+          video.play().catch(() => {
+            // If autoplay fails, wait for user interaction
+            const playOnInteraction = () => {
+              video.play().catch(() => {});
+              document.removeEventListener('click', playOnInteraction);
+            };
+            document.addEventListener('click', playOnInteraction);
+          });
+        };
+        
+        // Handle visibility change to play when visible
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              video.play().catch(() => {});
+            } else {
+              video.pause();
+            }
+          });
+        }, { threshold: 0.3 });
+        
+        observer.observe(video);
+        
+        // Also play on hover
+        video.addEventListener('mouseenter', () => {
+          video.play().catch(() => {});
+        });
+        video.addEventListener('mouseleave', () => {
+          video.pause();
+        });
+        
+        // Initial play attempt
+        playVideo();
+      });
+    }
+
     function renderGrid(items) {
       const grid = document.getElementById('foodGrid');
       if (items.length === 0) { grid.innerHTML = `<div class="empty-state"><span class="icon">🍰</span><p>لڤان نێزیکا</p></div>`; return; }
@@ -470,12 +503,15 @@
           const price = d.price !== undefined ? `${d.price.toLocaleString()} IQD` : '🎬 VIP Video';
           let mediaHtml;
           if (d.isVideo) {
-            mediaHtml = `<video src="${d.img}" muted playsinline preload="metadata" onmouseenter="this.play()" onmouseleave="this.pause()" onclick="openModal(${d.id})" style="width:100%;aspect-ratio:1/1;object-fit:cover;display:block;background:#000;"></video>`;
+            mediaHtml = `<video src="${d.img}" muted playsinline loop preload="metadata" onclick="openModal(${d.id})" style="width:100%;aspect-ratio:1/1;object-fit:cover;display:block;background:#000;cursor:pointer;"></video>`;
           } else {
-            mediaHtml = `<img src="${d.img}" alt="${name}" loading="lazy" onclick="openModal(${d.id})" style="width:100%;aspect-ratio:1/1;object-fit:cover;display:block;">`;
+            mediaHtml = `<img src="${d.img}" alt="${name}" loading="lazy" onclick="openModal(${d.id})" style="width:100%;aspect-ratio:1/1;object-fit:cover;display:block;cursor:pointer;">`;
           }
           return `<div class="food-card">${mediaHtml}<div class="card-body"><div class="dish-name">${name}</div><div class="dish-price">${price}</div></div></div>`;
         }).join('');
+
+        // Setup video players for VIP videos
+        setupVideoPlayers();
 
         // Attach click events for non-video cards
         document.querySelectorAll('.food-card').forEach((card, index) => {
@@ -500,6 +536,11 @@
       const container = document.getElementById('modalMediaContainer');
       if (modalItem.isVideo) {
         container.innerHTML = `<video src="${modalItem.img}" controls autoplay muted playsinline style="width:100%;height:220px;object-fit:cover;border-radius:20px 20px 0 0;background:#000;"></video>`;
+        // Ensure video plays in modal
+        setTimeout(() => {
+          const vid = container.querySelector('video');
+          if (vid) vid.play().catch(() => {});
+        }, 100);
       } else {
         container.innerHTML = `<img src="${modalItem.img}" alt="${getDishName(modalItem)}" style="width:100%;height:220px;object-fit:cover;border-radius:20px 20px 0 0;">`;
       }
@@ -558,7 +599,7 @@
     }
 
     function updateUILang() {
-      document.getElementById('menuTitle').textContent = translateText('menuTitle', 'NEFES SWEETS · VIP');
+      document.getElementById('menuTitle').textContent = translateText('menuTitle', 'NEFES SWEETS');
       document.getElementById('reserveTitle').textContent = translateText('reserveTitle', 'Reserve a Table');
       document.getElementById('labelName').textContent = translateText('labelName', 'Full Name');
       document.getElementById('labelPhone').textContent = translateText('labelPhone', 'Phone Number');
@@ -597,6 +638,7 @@
       btn.classList.toggle('visible', this.scrollTop > 200);
     });
 
+    // Initial setup
     setLanguage('tr');
     renderCategories();
     renderMenu();
