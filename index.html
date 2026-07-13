@@ -3,173 +3,296 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>NEFES SWEETS</title>
+  <title>NEFES SWEETS · modern</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-    html, body { width: 100%; height: 100%; overflow: hidden; font-family: 'DM Sans', sans-serif; background: #fff; color: #1a1a1a; touch-action: pan-x pan-y; }
-    .screen { position: absolute; inset: 0; display: flex; flex-direction: column; transition: opacity 0.4s ease, transform 0.4s ease; }
-    .screen.hidden { opacity: 0; pointer-events: none; transform: translateX(30px); }
+    html, body { width: 100%; height: 100%; overflow: hidden; font-family: 'DM Sans', sans-serif; background: #fbf7f5; color: #1e1a1a; touch-action: pan-x pan-y; }
+
+    /* ===== SCREENS ===== */
+    .screen { position: absolute; inset: 0; display: flex; flex-direction: column; transition: opacity 0.6s cubic-bezier(0.23, 1, 0.32, 1), transform 0.6s cubic-bezier(0.23, 1, 0.32, 1); will-change: transform, opacity; }
+    .screen.hidden { opacity: 0; pointer-events: none; transform: scale(0.94) translateY(20px); }
+
+    /* ===== LANDING ===== */
     #landing { background: #fff; justify-content: flex-end; }
     .hero-video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; pointer-events: none; }
-    .video-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.2) 30%, rgba(255,245,247,0.85) 100%); z-index: 1; pointer-events: none; }
-    .lang-btn { position: absolute; top: 18px; right: 18px; z-index: 20; background: #ff6b9d; border: none; border-radius: 8px; padding: 8px 14px; color: #fff; font-size: 14px; font-weight: 500; display: flex; align-items: center; gap: 6px; cursor: pointer; font-family: inherit; box-shadow: 0 2px 12px rgba(255,107,157,0.3); transition: background 0.2s; }
-    .lang-btn:hover { background: #e8436f; }
-    .global-lang-dropdown { position: absolute; top: 55px; right: 18px; background: white; border-radius: 12px; box-shadow: 0 8px 20px rgba(0,0,0,0.2); z-index: 30; width: 140px; overflow: hidden; display: none; }
-    .global-lang-dropdown div { padding: 10px 16px; color: #333; font-weight: 500; cursor: pointer; transition: background 0.2s; }
-    .global-lang-dropdown div:hover { background: #ff9ebd; color: white; }
-    .lang-btn.active .global-lang-dropdown { display: block; }
-    .wifi-badge { position: absolute; top: 12px; right: 18px; z-index: 20; background: #ff6b9d; border-radius: 8px; padding: 8px 12px; font-size: 13px; font-weight: 500; color: #fff; box-shadow: 0 2px 12px rgba(255,107,157,0.3); line-height: 1.4; }
-    .landing-bottom { position: relative; z-index: 20; padding: 0 16px 24px; }
-    .cta-btn { display: block; width: 100%; padding: 17px; border: none; border-radius: 10px; font-size: 17px; font-weight: 500; font-family: inherit; cursor: pointer; transition: transform 0.12s, filter 0.12s; letter-spacing: 0.3px; }
-    .cta-btn:active { transform: scale(0.97); filter: brightness(0.9); }
-    .cta-reserve { background: #ff6b9d; color: #fff; margin-bottom: 10px; }
-    .cta-menu    { background: #e8436f; color: #fff; }
-    .social-row { display: flex; justify-content: center; gap: 10px; padding: 16px 0 8px; }
-    .social-icon { width: 52px; height: 52px; background: #ff6b9d; border-radius: 12px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: transform 0.12s; text-decoration: none; }
-    .social-icon:active { transform: scale(0.9); }
-    .social-icon svg { width: 26px; height: 26px; fill: #fff; }
-    .brand-footer { text-align: center; padding-bottom: 10px; position: relative; z-index: 20; }
-    .brand-footer .brand-name { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: #e8436f; letter-spacing: 1px; display: block; }
-    .brand-footer .powered { font-size: 11px; color: #8a7a7e; display: flex; align-items: center; justify-content: center; gap: 4px; margin-top: 2px; }
-    /* MENU */
-    #menu { background: #ffffff; flex-direction: column; overflow: hidden; }
-    .menu-header { background: #ff6b9d; padding: 14px 16px 0; flex-shrink: 0; }
-    .menu-header-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
-    .menu-title { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 600; color: #fff; text-align: center; flex: 1; }
-    .lang-bar { background: #e8436f; border-radius: 8px; padding: 10px; display: flex; align-items: center; justify-content: center; gap: 6px; margin-bottom: 14px; cursor: pointer; font-size: 15px; color: #fff; position: relative; }
-    .lang-dropdown { position: absolute; top: 45px; background: white; border-radius: 12px; box-shadow: 0 8px 20px rgba(0,0,0,0.2); z-index: 30; width: 140px; overflow: hidden; display: none; }
-    .lang-dropdown div { padding: 10px 16px; color: #333; font-weight: 500; cursor: pointer; transition: background 0.2s; }
-    .lang-dropdown div:hover { background: #ff9ebd; color: white; }
-    .lang-bar.active .lang-dropdown { display: block; }
-    .cat-scroll { display: flex; gap: 10px; overflow-x: auto; padding: 0 0 14px; scrollbar-width: none; }
-    .cat-scroll::-webkit-scrollbar { display: none; }
-    .cat-item { flex-shrink: 0; background: #e8436f; border-radius: 10px; padding: 10px 14px 8px; text-align: center; cursor: pointer; transition: background 0.2s, transform 0.12s; min-width: 80px; border: 2px solid transparent; }
-    .cat-item.active { background: #ff9ebd; border-color: #fff; }
-    .cat-item:active { transform: scale(0.94); }
-    .cat-item span { font-size: 12px; color: #fff; display: block; font-weight: 500; }
-    .menu-icon { width: 76px; height: 35px; object-fit: contain; display: inline-block; vertical-align: middle; font-weight: bold; }
-    .search-bar-wrap { padding: 0 16px 12px; flex-shrink: 0; display: none; }
-    .search-bar-wrap.visible { display: block; }
-    .search-input { width: 100%; padding: 11px 16px; border-radius: 10px; border: 1px solid #ffe0e8; background: #fff; color: #1a1a1a; font-size: 15px; font-family: inherit; outline: none; }
-    .food-grid-wrap { flex: 1; overflow-y: auto; padding: 12px 12px 80px; scrollbar-width: thin; }
-    .food-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-    .food-card { background: #fff5f7; border-radius: 10px; overflow: hidden; cursor: pointer; transition: transform 0.15s; position: relative; border: 1px solid #ffe0e8; }
-    .food-card:active { transform: scale(0.97); }
-    .food-card video { width: 100%; aspect-ratio: 1/1; object-fit: cover; display: block; background: #000; }
-    .food-card img { width: 100%; aspect-ratio: 1/1; object-fit: cover; display: block; }
-    .food-card .card-body { padding: 8px 10px 10px; }
-    .food-card .dish-name { font-size: 17px; font-weight: 700; color: #1a1a1a; margin-bottom: 3px; line-height: 1.3; }
-    .food-card .dish-price { font-size: 14px; color: #ff6b9d; font-weight: 700; }
-    .back-btn { position: absolute; top: 14px; left: 10px; background: none; border: none; cursor: pointer; padding: 4px 8px; color: #fff; font-size: 22px; z-index: 20; line-height: 1; }
-    .cart-fab { position: fixed; bottom: 24px; right: 20px; z-index: 100; width: 54px; height: 54px; background: #ff6b9d; border-radius: 50%; border: none; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 20px rgba(255,107,157,0.5); transition: transform 0.15s; display: none; }
-    .cart-fab svg { width: 26px; height: 26px; fill: #fff; }
-    .cart-fab .cart-count { position: absolute; top: -4px; right: -4px; background: #e8a832; color: #000; font-size: 11px; font-weight: 700; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
-    #reserve { background: #ffffff; }
-    .reserve-header { background: #ff6b9d; padding: 14px 16px; display: flex; align-items: center; gap: 12px; }
-    .reserve-title { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 600; color: #fff; }
-    .reserve-body { flex: 1; overflow-y: auto; padding: 24px 20px; }
-    .form-group { margin-bottom: 18px; }
-    .form-label { display: block; font-size: 13px; color: #8a7a7e; margin-bottom: 6px; font-weight: 500; }
-    .form-input, .form-select { width: 100%; padding: 13px 14px; background: #fff; border: 1.5px solid #ffe0e8; border-radius: 10px; color: #1a1a1a; font-size: 15px; font-family: inherit; outline: none; }
-    .submit-btn { width: 100%; padding: 17px; background: #ff6b9d; color: #fff; border: none; border-radius: 10px; font-size: 17px; font-weight: 500; font-family: inherit; cursor: pointer; margin-top: 8px; }
-    .reserve-hero { width: 100%; height: 180px; background: url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=800&q=80') center/cover; border-radius: 12px; margin-bottom: 24px; position: relative; overflow: hidden; }
-    .modal-overlay { position: fixed; inset: 0; z-index: 200; background: rgba(0,0,0,0.7); display: flex; align-items: flex-end; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
-    .modal-overlay.open { opacity: 1; pointer-events: all; }
-    .modal-sheet { width: 100%; background: #fff; border-radius: 20px 20px 0 0; padding-bottom: 30px; transform: translateY(100%); transition: transform 0.35s cubic-bezier(.32,.72,0,1); }
-    .modal-overlay.open .modal-sheet { transform: translateY(0); }
-    .modal-sheet video { width: 100%; height: 220px; object-fit: cover; border-radius: 20px 20px 0 0; background: #000; }
-    .modal-sheet img { width: 100%; height: 220px; object-fit: cover; border-radius: 20px 20px 0 0; }
-    .modal-body { padding: 16px 20px; }
-    .modal-name { font-size: 20px; font-weight: 600; margin-bottom: 4px; color: #1a1a1a; }
-    .modal-price { color: #ff6b9d; font-size: 20px; font-weight: 900; margin-bottom: 10px; }
-    .modal-desc { color: #8a7a7e; font-size: 14px; line-height: 1.6; margin-bottom: 20px; }
-    .modal-close { position: absolute; top: 12px; right: 16px; background: rgba(0,0,0,0.5); border: none; width: 32px; height: 32px; border-radius: 50%; color: #fff; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 5; }
-    .modal-add { width: 100%; padding: 15px; background: #ff6b9d; color: #fff; border: none; border-radius: 10px; font-size: 16px; font-weight: 500; font-family: inherit; cursor: pointer; }
-    .toast { position: fixed; top: 20px; left: 50%; transform: translateX(-50%) translateY(-80px); background: #ff6b9d; color: #fff; padding: 12px 24px; border-radius: 24px; font-size: 14px; font-weight: 500; z-index: 300; transition: transform 0.35s; white-space: nowrap; box-shadow: 0 4px 20px rgba(0,0,0,0.4); }
-    .toast.show { transform: translateX(-50%) translateY(0); }
-    .scroll-top { position: fixed; bottom: 88px; right: 20px; z-index: 99; width: 46px; height: 46px; background: #e8436f; color: #fff; border: none; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 12px rgba(0,0,0,0.2); opacity: 0; pointer-events: none; transition: opacity 0.3s; }
-    .scroll-top.visible { opacity: 1; pointer-events: all; }
-    .empty-state { text-align: center; padding: 40px 20px; color: #8a7a7e; }
-    .empty-state .icon { font-size: 64px; margin-bottom: 16px; display: block; }
-    .video-badge { position: absolute; top: 8px; right: 8px; background: rgba(0,0,0,0.7); color: #fff; font-size: 11px; padding: 3px 8px; border-radius: 12px; pointer-events: none; z-index: 2; }
+    .video-overlay { position: absolute; inset: 0; background: linear-gradient(145deg, rgba(255,215,215,0.10) 0%, rgba(255,235,240,0.65) 70%, rgba(255,245,247,0.92) 100%); z-index: 1; pointer-events: none; backdrop-filter: blur(1px); }
 
-    /* ----- DESSERT-THEMED SKELETON LOADING ----- */
-    .skeleton-card {
-      background: #fff5f7;
-      border-radius: 10px;
-      overflow: hidden;
-      border: 1px solid #ffe0e8;
-      position: relative;
-      cursor: default;
+    /* floating bubbles + sparkle */
+    .bubble { position: absolute; border-radius: 50%; background: rgba(255, 107, 157, 0.08); z-index: 1; pointer-events: none; animation: floatBubble 18s infinite alternate ease-in-out; }
+    .bubble:nth-child(1) { width: 180px; height: 180px; top: 10%; left: -40px; animation-duration: 22s; }
+    .bubble:nth-child(2) { width: 260px; height: 260px; bottom: 20%; right: -60px; animation-duration: 28s; background: rgba(255, 180, 200, 0.10); }
+    @keyframes floatBubble { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(40px, -30px) scale(1.05); } }
+
+    /* sparkle */
+    .sparkle { position: absolute; width: 8px; height: 8px; background: #ffb6c9; border-radius: 50%; z-index: 1; pointer-events: none; animation: sparkleFade 4s infinite alternate; }
+    .sparkle:nth-child(3) { top: 15%; left: 20%; animation-delay: 0.5s; width: 12px; height: 12px; }
+    .sparkle:nth-child(4) { top: 70%; left: 80%; animation-delay: 1.2s; width: 6px; height: 6px; }
+    .sparkle:nth-child(5) { top: 40%; left: 10%; animation-delay: 2s; width: 10px; height: 10px; }
+    @keyframes sparkleFade { 0% { opacity: 0; transform: scale(0.5); } 100% { opacity: 1; transform: scale(1.2); } }
+
+    .lang-btn { position: absolute; top: 20px; right: 20px; z-index: 20; background: rgba(255, 107, 157, 0.9); backdrop-filter: blur(8px); border: none; border-radius: 40px; padding: 10px 18px; color: #fff; font-size: 14px; font-weight: 500; display: flex; align-items: center; gap: 8px; cursor: pointer; font-family: inherit; box-shadow: 0 8px 24px rgba(255,107,157,0.25); transition: all 0.25s; letter-spacing: 0.3px; }
+    .lang-btn:hover { background: #ff4d82; transform: scale(1.02); }
+    .global-lang-dropdown { position: absolute; top: 58px; right: 0; background: rgba(255,255,255,0.96); backdrop-filter: blur(12px); border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.15); z-index: 30; width: 150px; overflow: hidden; display: none; padding: 6px 0; }
+    .global-lang-dropdown div { padding: 12px 20px; color: #1e1a1a; font-weight: 500; cursor: pointer; transition: all 0.15s; }
+    .global-lang-dropdown div:hover { background: #ff9ebd; color: #fff; padding-left: 26px; }
+    .lang-btn.active .global-lang-dropdown { display: block; }
+
+    .wifi-badge { position: absolute; top: 15px; left: 2px; z-index: 20; background: rgba(0,0,0,0.5); backdrop-filter: blur(12px); border-radius: 40px; padding: 3px 12px; font-size: 13px; font-weight: 500; color: #fff; box-shadow: 0 4px 16px rgba(0,0,0,0.10); line-height: 1.4; border: 1px solid rgba(255,255,255,0.15); }
+    .wifi-badge span { opacity: 0.8; }
+
+    .landing-bottom { position: relative; z-index: 20; padding: 0 20px 30px; width: 100%; max-width: 480px; margin: 0 auto; animation: fadeUp 1s ease 0.2s both; }
+    @keyframes fadeUp { 0% { opacity: 0; transform: translateY(30px); } 100% { opacity: 1; transform: translateY(0); } }
+
+    .cta-btn { display: block; width: 100%; padding: 18px; border: none; border-radius: 60px; font-size: 18px; font-weight: 600; font-family: inherit; cursor: pointer; transition: all 0.2s ease; letter-spacing: 0.5px; box-shadow: 0 8px 24px rgba(255,107,157,0.25); }
+    .cta-btn:active { transform: scale(0.94); filter: brightness(0.92); }
+    .cta-reserve { background: #ff6b9d; color: #fff; margin-bottom: 12px; }
+    .cta-reserve:hover { background: #ff4d82; transform: translateY(-3px) scale(1.01); box-shadow: 0 12px 32px rgba(255,107,157,0.35); }
+    .cta-menu    { background: #e8436f; color: #fff; }
+    .cta-menu:hover { background: #d42a5a; transform: translateY(-3px) scale(1.01); box-shadow: 0 12px 32px rgba(232,67,111,0.35); }
+
+    .social-row { display: flex; justify-content: center; gap: 14px; padding: 22px 0 14px; flex-wrap: wrap; }
+    .social-icon { width: 56px; height: 56px; background: rgba(255, 107, 157, 0.12); backdrop-filter: blur(4px); border-radius: 20px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.25s; text-decoration: none; border: 1px solid rgba(255,107,157,0.10); }
+    .social-icon:hover { background: #ff6b9d; transform: translateY(-6px) scale(1.05); box-shadow: 0 12px 28px rgba(255,107,157,0.25); }
+    .social-icon svg { width: 26px; height: 26px; fill: #1e1a1a; transition: fill 0.2s; }
+    .social-icon:hover svg { fill: #fff; }
+
+    .brand-footer { text-align: center; padding: 6px 0 4px; position: relative; z-index: 20; }
+    .brand-footer .brand-name { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 700; color: #e8436f; letter-spacing: 2px; display: block; text-shadow: 0 2px 8px rgba(232,67,111,0.10); animation: glowPulse 3s infinite alternate; }
+    @keyframes glowPulse { 0% { text-shadow: 0 2px 8px rgba(232,67,111,0.10); } 100% { text-shadow: 0 4px 20px rgba(232,67,111,0.25); } }
+    .brand-footer .powered { font-size: 11px; color: #8a7a7e; display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: 4px; }
+
+    /* ===== MENU ===== */
+    #menu { background: #fbf7f5; flex-direction: column; overflow: hidden; }
+    .menu-header { 
+      background: linear-gradient(145deg, #ff6b9d, #e8436f); 
+      padding: 16px 16px 0; 
+      flex-shrink: 0; 
+      border-radius: 0 0 32px 32px; 
+      box-shadow: 0 8px 30px rgba(232,67,111,0.25); 
+      position: relative; 
+      z-index: 2; 
+      animation: slideDown 0.6s ease both; 
     }
-    .skeleton-media {
-      width: 100%;
-      aspect-ratio: 1/1;
-      background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 50%, #f48fb1 100%);
-      position: relative;
-      overflow: hidden;
+    @keyframes slideDown { 0% { opacity: 0; transform: translateY(-30px); } 100% { opacity: 1; transform: translateY(0); } }
+    .menu-header-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+    .menu-title { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 600; color: #fff; text-align: center; flex: 1; letter-spacing: 1px; }
+
+    /* ---- FIXED: lang-bar stays above categories with high z-index ---- */
+    .lang-bar {
+      background: rgba(255,255,255,0.20);
+      backdrop-filter: blur(8px);
+      border-radius: 40px;
+      padding: 10px 20px;
       display: flex;
       align-items: center;
       justify-content: center;
+      gap: 10px;
+      margin-bottom: 16px;
+      cursor: pointer;
+      font-size: 15px;
+      color: #fff;
+      position: relative;
+      font-weight: 500;
+      border: 1px solid rgba(255,255,255,0.20);
+      transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+      animation: langBarPulse 2s infinite alternate ease-in-out;
+      transform-origin: center;
+      letter-spacing: 0.5px;
+      z-index: 25;
     }
-    .skeleton-media::after {
-      content: '';
+    @keyframes langBarPulse {
+      0% { box-shadow: 0 4px 16px rgba(255,255,255,0.10); transform: scale(1); }
+      100% { box-shadow: 0 8px 32px rgba(255,255,255,0.25); transform: scale(1.01); }
+    }
+    .lang-bar:hover {
+      background: rgba(255,255,255,0.35);
+      transform: scale(1.02) translateY(-2px);
+      box-shadow: 0 12px 40px rgba(255,255,255,0.20);
+    }
+    .lang-bar:active { transform: scale(0.96); }
+    .lang-bar svg { transition: transform 0.4s; }
+    .lang-bar:hover svg { transform: rotate(180deg); }
+    .lang-dropdown {
       position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.3) 0%, transparent 60%);
-      animation: dessertShine 2.5s ease-in-out infinite;
+      top: 56px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255,255,255,0.98);
+      backdrop-filter: blur(16px);
+      border-radius: 24px;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.15);
+      z-index: 999;
+      width: 160px;
+      overflow: hidden;
+      display: none;
+      padding: 8px 0;
+      animation: dropdownSlide 0.3s ease both;
     }
-    @keyframes dessertShine {
-      0% { transform: translateX(-100%) rotate(-15deg); opacity: 0; }
-      30% { opacity: 1; }
-      70% { opacity: 1; }
-      100% { transform: translateX(100%) rotate(-15deg); opacity: 0; }
+    @keyframes dropdownSlide {
+      0% { opacity: 0; transform: translateX(-50%) translateY(-10px) scale(0.96); }
+      100% { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
     }
-    .skeleton-icon {
-      font-size: 48px;
-      z-index: 2;
-      animation: floatDessert 2s ease-in-out infinite;
-      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+    .lang-dropdown div {
+      padding: 14px 24px;
+      color: #1e1a1a;
+      font-weight: 500;
+      cursor: pointer;
+      transition: 0.2s;
+      text-align: center;
+      border-radius: 12px;
+      margin: 2px 6px;
     }
-    @keyframes floatDessert {
-      0%, 100% { transform: translateY(0px) rotate(-3deg); }
-      50% { transform: translateY(-10px) rotate(3deg); }
+    .lang-dropdown div:hover {
+      background: #ff6b9d;
+      color: #fff;
+      transform: scale(1.02);
     }
-    .skeleton-body {
-      padding: 8px 10px 10px;
+    .lang-bar.active .lang-dropdown { display: block; }
+
+    .cat-scroll {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding: 0 0 16px;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+      position: relative;
+      z-index: 20;
     }
-    .skeleton-text {
-      height: 18px;
-      background: linear-gradient(90deg, #f8bbd0 0%, #fce4ec 50%, #f8bbd0 100%);
-      border-radius: 6px;
-      margin: 0 0 6px 0;
-      width: 80%;
-      animation: pulseText 1.8s ease-in-out infinite;
+    .cat-scroll::-webkit-scrollbar { display: none; }
+    .cat-item {
+      flex-shrink: 0;
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(4px);
+      border-radius: 60px;
+      padding: 8px 16px 8px 12px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+      min-width: 70px;
+      border: 2px solid transparent;
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
-    .skeleton-price {
-      height: 14px;
-      background: linear-gradient(90deg, #f8bbd0 0%, #fce4ec 50%, #f8bbd0 100%);
-      border-radius: 6px;
-      width: 50%;
-      animation: pulseText 1.8s ease-in-out infinite 0.3s;
+    .cat-item.active {
+      background: #fff;
+      border-color: #fff;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.10);
+      transform: scale(1.04);
     }
-    @keyframes pulseText {
-      0%, 100% { opacity: 0.5; }
-      50% { opacity: 1; }
-    }
+    .cat-item.active span { color: #e8436f; font-weight: 700; }
+    .cat-item:active { transform: scale(0.92); }
+    .cat-item span { font-size: 13px; color: #fff; font-weight: 500; white-space: nowrap; }
+    .menu-icon { width: 28px; height: 28px; object-fit: contain; display: inline-block; vertical-align: middle; }
+
+    .search-bar-wrap { padding: 0 16px 14px; flex-shrink: 0; display: none; animation: fadeIn 0.4s ease; }
+    .search-bar-wrap.visible { display: block; }
+    @keyframes fadeIn { 0% { opacity: 0; transform: translateY(-10px); } 100% { opacity: 1; transform: translateY(0); } }
+    .search-input { width: 100%; padding: 14px 18px; border-radius: 60px; border: 1.5px solid rgba(255,107,157,0.15); background: rgba(255,255,255,0.8); backdrop-filter: blur(4px); color: #1a1a1a; font-size: 15px; font-family: inherit; outline: none; transition: all 0.3s; box-shadow: 0 2px 12px rgba(0,0,0,0.02); }
+    .search-input:focus { border-color: #ff6b9d; background: #fff; box-shadow: 0 4px 20px rgba(255,107,157,0.08); transform: scale(1.01); }
+
+    .food-grid-wrap { flex: 1; overflow-y: auto; padding: 8px 12px 100px; scrollbar-width: thin; }
+    .food-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+    /* card modern + hover animations */
+    .food-card { background: #ffffff; border-radius: 28px; overflow: hidden; cursor: pointer; transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1); border: 1px solid rgba(255,107,157,0.08); box-shadow: 0 4px 20px rgba(0,0,0,0.02); animation: cardPop 0.5s ease both; }
+    .food-card:nth-child(1) { animation-delay: 0.05s; }
+    .food-card:nth-child(2) { animation-delay: 0.10s; }
+    .food-card:nth-child(3) { animation-delay: 0.15s; }
+    .food-card:nth-child(4) { animation-delay: 0.20s; }
+    .food-card:nth-child(5) { animation-delay: 0.25s; }
+    .food-card:nth-child(6) { animation-delay: 0.30s; }
+    @keyframes cardPop { 0% { opacity: 0; transform: scale(0.92) translateY(12px); } 100% { opacity: 1; transform: scale(1) translateY(0); } }
+    .food-card:hover { transform: translateY(-8px) scale(1.02); box-shadow: 0 20px 48px rgba(232,67,111,0.12); border-color: rgba(255,107,157,0.20); }
+    .food-card:active { transform: scale(0.94); }
+    .food-card video, .food-card img { width: 100%; aspect-ratio: 1/1; object-fit: cover; display: block; background: #f3e9ec; transition: transform 0.4s; }
+    .food-card:hover video, .food-card:hover img { transform: scale(1.02); }
+    .food-card .card-body { padding: 12px 14px 14px; }
+    .food-card .dish-name { font-size: 16px; font-weight: 700; color: #1a1a1a; margin-bottom: 4px; line-height: 1.3; letter-spacing: -0.2px; }
+    .food-card .dish-price { font-size: 14px; color: #ff6b9d; font-weight: 700; display: inline-block; background: rgba(255,107,157,0.08); padding: 2px 12px; border-radius: 40px; transition: all 0.3s; }
+    .food-card:hover .dish-price { background: rgba(255,107,157,0.18); transform: scale(1.02); }
+
+    .back-btn { background: rgba(255,255,255,0.15); backdrop-filter: blur(6px); border: none; cursor: pointer; padding: 6px 10px; border-radius: 40px; color: #fff; font-size: 20px; z-index: 20; line-height: 1; transition: all 0.25s; }
+    .back-btn:hover { background: rgba(255,255,255,0.30); transform: rotate(-8deg); }
+
+    .cart-fab { position: fixed; bottom: 28px; right: 20px; z-index: 100; width: 60px; height: 60px; background: linear-gradient(145deg, #ff6b9d, #e8436f); border-radius: 50%; border: none; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 8px 32px rgba(255,107,157,0.45); transition: all 0.3s; display: none; animation: fabPop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+    @keyframes fabPop { 0% { opacity: 0; transform: scale(0.5) rotate(-20deg); } 100% { opacity: 1; transform: scale(1) rotate(0); } }
+    .cart-fab:hover { transform: scale(1.08) translateY(-6px); box-shadow: 0 16px 48px rgba(255,107,157,0.55); }
+    .cart-fab svg { width: 28px; height: 28px; fill: #fff; }
+    .cart-fab .cart-count { position: absolute; top: -6px; right: -6px; background: #f5b042; color: #1a1a1a; font-size: 12px; font-weight: 700; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 12px rgba(245,176,66,0.4); animation: countPop 0.3s ease; }
+    @keyframes countPop { 0% { transform: scale(0.6); } 50% { transform: scale(1.3); } 100% { transform: scale(1); } }
+
+    /* ===== RESERVE ===== */
+    #reserve { background: #fbf7f5; }
+    .reserve-header { background: linear-gradient(145deg, #ff6b9d, #e8436f); padding: 16px 20px; display: flex; align-items: center; gap: 12px; border-radius: 0 0 32px 32px; box-shadow: 0 8px 30px rgba(232,67,111,0.20); animation: slideDown 0.5s ease both; }
+    .reserve-title { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 600; color: #fff; letter-spacing: 1px; }
+    .reserve-body { flex: 1; overflow-y: auto; padding: 24px 20px; animation: fadeUp 0.6s ease 0.1s both; }
+    .reserve-hero { width: 100%; height: 160px; background: url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=800&q=80') center/cover; border-radius: 28px; margin-bottom: 28px; position: relative; overflow: hidden; box-shadow: 0 8px 30px rgba(0,0,0,0.04); transition: transform 0.4s; }
+    .reserve-hero:hover { transform: scale(1.01); }
+    .form-group { margin-bottom: 20px; animation: fadeUp 0.5s ease both; }
+    .form-group:nth-child(2) { animation-delay: 0.05s; }
+    .form-group:nth-child(3) { animation-delay: 0.10s; }
+    .form-group:nth-child(4) { animation-delay: 0.15s; }
+    .form-group:nth-child(5) { animation-delay: 0.20s; }
+    .form-group:nth-child(6) { animation-delay: 0.25s; }
+    .form-label { display: block; font-size: 13px; color: #8a7a7e; margin-bottom: 6px; font-weight: 600; letter-spacing: 0.3px; }
+    .form-input, .form-select { width: 100%; padding: 14px 16px; background: #fff; border: 1.5px solid rgba(255,107,157,0.10); border-radius: 60px; color: #1a1a1a; font-size: 15px; font-family: inherit; outline: none; transition: all 0.3s; }
+    .form-input:focus, .form-select:focus { border-color: #ff6b9d; box-shadow: 0 4px 20px rgba(255,107,157,0.08); transform: scale(1.01); }
+    .submit-btn { width: 100%; padding: 18px; background: linear-gradient(145deg, #ff6b9d, #e8436f); color: #fff; border: none; border-radius: 60px; font-size: 17px; font-weight: 600; font-family: inherit; cursor: pointer; margin-top: 8px; box-shadow: 0 8px 28px rgba(255,107,157,0.30); transition: all 0.3s; }
+    .submit-btn:hover { transform: translateY(-3px) scale(1.01); box-shadow: 0 14px 40px rgba(255,107,157,0.40); }
+    .submit-btn:active { transform: scale(0.94); }
+
+    /* ===== MODAL ===== */
+    .modal-overlay { position: fixed; inset: 0; z-index: 200; background: rgba(0,0,0,0.55); backdrop-filter: blur(12px); display: flex; align-items: flex-end; opacity: 0; pointer-events: none; transition: opacity 0.4s; }
+    .modal-overlay.open { opacity: 1; pointer-events: all; }
+    .modal-sheet { width: 100%; max-width: 460px; margin: 0 auto; background: #fff; border-radius: 40px 40px 0 0; padding-bottom: 30px; transform: translateY(100%); transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1); box-shadow: 0 -20px 60px rgba(0,0,0,0.10); }
+    .modal-overlay.open .modal-sheet { transform: translateY(0); }
+    .modal-sheet video, .modal-sheet img { width: 100%; height: 240px; object-fit: cover; border-radius: 40px 40px 0 0; background: #f3e9ec; }
+    .modal-body { padding: 20px 24px; }
+    .modal-name { font-size: 22px; font-weight: 700; color: #1a1a1a; margin-bottom: 4px; }
+    .modal-price { color: #ff6b9d; font-size: 22px; font-weight: 900; margin-bottom: 8px; }
+    .modal-desc { color: #6a5a5e; font-size: 14px; line-height: 1.6; margin-bottom: 20px; }
+    .modal-close { position: absolute; top: 16px; right: 20px; background: rgba(0,0,0,0.4); backdrop-filter: blur(8px); border: none; width: 40px; height: 40px; border-radius: 50%; color: #fff; font-size: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 5; transition: all 0.3s; }
+    .modal-close:hover { background: rgba(0,0,0,0.6); transform: rotate(90deg); }
+    .modal-add { width: 100%; padding: 16px; background: linear-gradient(145deg, #ff6b9d, #e8436f); color: #fff; border: none; border-radius: 60px; font-size: 16px; font-weight: 600; font-family: inherit; cursor: pointer; box-shadow: 0 6px 24px rgba(255,107,157,0.30); transition: all 0.3s; }
+    .modal-add:hover { transform: scale(1.02); box-shadow: 0 8px 30px rgba(255,107,157,0.40); }
+
+    .toast { position: fixed; top: 30px; left: 50%; transform: translateX(-50%) translateY(-80px); background: #1e1a1a; color: #fff; padding: 14px 28px; border-radius: 60px; font-size: 14px; font-weight: 500; z-index: 300; transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1); white-space: nowrap; box-shadow: 0 12px 40px rgba(0,0,0,0.25); backdrop-filter: blur(8px); }
+    .toast.show { transform: translateX(-50%) translateY(0); }
+    .scroll-top { position: fixed; bottom: 100px; right: 20px; z-index: 99; width: 48px; height: 48px; background: rgba(232,67,111,0.9); backdrop-filter: blur(8px); color: #fff; border: none; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(0,0,0,0.10); opacity: 0; pointer-events: none; transition: all 0.4s; }
+    .scroll-top.visible { opacity: 1; pointer-events: all; }
+    .scroll-top:hover { background: #e8436f; transform: scale(1.08) translateY(-4px); }
+
+    /* skeleton */
+    .skeleton-card { background: #fff; border-radius: 28px; overflow: hidden; border: 1px solid rgba(255,107,157,0.04); box-shadow: 0 4px 20px rgba(0,0,0,0.02); }
+    .skeleton-media { width: 100%; aspect-ratio: 1/1; background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 50%, #f48fb1 100%); position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+    .skeleton-media::after { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.5) 0%, transparent 60%); animation: dessertShine 2.8s ease-in-out infinite; }
+    @keyframes dessertShine { 0% { transform: translateX(-100%) rotate(-15deg); opacity: 0; } 30% { opacity: 1; } 70% { opacity: 1; } 100% { transform: translateX(100%) rotate(-15deg); opacity: 0; } }
+    .skeleton-icon { font-size: 52px; z-index: 2; animation: floatDessert 2.4s ease-in-out infinite; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.06)); }
+    @keyframes floatDessert { 0%, 100% { transform: translateY(0px) rotate(-4deg); } 50% { transform: translateY(-14px) rotate(4deg); } }
+    .skeleton-body { padding: 12px 14px 14px; }
+    .skeleton-text { height: 18px; background: linear-gradient(90deg, #f8bbd0 0%, #fce4ec 50%, #f8bbd0 100%); border-radius: 40px; margin: 0 0 6px 0; width: 80%; animation: pulseText 1.8s ease-in-out infinite; }
+    .skeleton-price { height: 14px; background: linear-gradient(90deg, #f8bbd0 0%, #fce4ec 50%, #f8bbd0 100%); border-radius: 40px; width: 50%; animation: pulseText 1.8s ease-in-out infinite 0.2s; }
+    @keyframes pulseText { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
   </style>
 </head>
 <body>
-  <!-- LANDING -->
+
+  <!-- ===== LANDING ===== -->
   <div class="screen" id="landing">
     <video class="hero-video" autoplay muted loop playsinline>
       <source src="image/4.mp4" type="video/mp4">
     </video>
     <div class="video-overlay"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="sparkle"></div>
+    <div class="sparkle"></div>
+    <div class="sparkle"></div>
+
     <div class="lang-btn" id="globalLangBtnWrapper">
       <span id="globalLangLabel">Türkçe ▾</span>
       <div class="global-lang-dropdown" id="globalLangDropdown">
@@ -177,7 +300,8 @@
         <div data-lang="ku">کوردی</div>
       </div>
     </div>
-    <div class="wifi-badge">🌐 Nefes Sweets<br>🔐 20262026</div>
+    <div class="wifi-badge">🛜 Nefes Sweets<br><span>🔑 20262026</span></div>
+
     <div class="landing-bottom">
       <button class="cta-btn cta-menu" id="menuBtnLanding">Menü</button>
       <div class="social-row">
@@ -192,13 +316,14 @@
     </div>
   </div>
 
-  <!-- MENU -->
+  <!-- ===== MENU ===== -->
   <div class="screen hidden" id="menu">
     <div class="menu-header">
       <div class="menu-header-top">
         <button class="back-btn" onclick="showScreen('landing')"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg></button>
         <span class="menu-title" id="menuTitle">NEFES SWEETS</span>
       </div>
+      <!-- LANG BAR - placed above categories with high z-index -->
       <div class="lang-bar" id="menuLangBar">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg>
         <span id="menuLangLabel">Türkçe ▾</span>
@@ -211,10 +336,10 @@
     </div>
     <div class="search-bar-wrap" id="searchWrap"><input class="search-input" id="searchInput" placeholder="Yemek ara..." oninput="filterDishes(this.value)"></div>
     <div class="food-grid-wrap" id="foodGridWrap"><div class="food-grid" id="foodGrid"></div></div>
-    <button class="scroll-top" id="scrollTop" onclick="document.getElementById('foodGridWrap').scrollTo({top:0,behavior:'smooth'})"><svg viewBox="0 0 24 24"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg></button>
+    <button class="scroll-top" id="scrollTop" onclick="document.getElementById('foodGridWrap').scrollTo({top:0,behavior:'smooth'})"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg></button>
   </div>
 
-  <!-- RESERVE -->
+  <!-- ===== RESERVE ===== -->
   <div class="screen hidden" id="reserve">
     <div class="reserve-header"><button class="back-btn" onclick="showScreen('landing')"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg></button><span class="reserve-title" id="reserveTitle">Masa Rezervasyonu</span></div>
     <div class="reserve-body"><div class="reserve-hero"></div>
@@ -228,7 +353,7 @@
     </div>
   </div>
 
-  <!-- MODAL & CART -->
+  <!-- ===== MODAL & CART ===== -->
   <div class="modal-overlay" id="itemModal" onclick="closeModal(event)">
     <div class="modal-sheet">
       <div id="modalMediaContainer"></div>
@@ -237,18 +362,18 @@
         <div class="modal-name" id="modalName"></div>
         <div class="modal-price" id="modalPrice"></div>
         <div class="modal-desc" id="modalDesc"></div>
-       
+     
       </div>
     </div>
   </div>
-  <button class="cart-fab" id="cartFab" onclick="showToast('Sipariş mutfağa gönderildi! 🍽️')"><svg viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96C5 16.1 6.1 17 7 17h11v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63H19c.75 0 1.41-.41 1.75-1.03l3.58-6.49A1 1 0 0023.43 4H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2S15.9 22 17 22s2-.9 2-2-.9-2-2-2z"/></svg><span class="cart-count" id="cartCount">0</span></button>
+  <button class="cart-fab" id="cartFab" ><svg viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96C5 16.1 6.1 17 7 17h11v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63H19c.75 0 1.41-.41 1.75-1.03l3.58-6.49A1 1 0 0023.43 4H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2S15.9 22 17 22s2-.9 2-2-.9-2-2-2z"/></svg><span class="cart-count" id="cartCount">0</span></button>
   <div class="toast" id="toast"></div>
 
   <script>
-    // ---------- TRANSLATIONS ----------
+    // ===== TRANSLATIONS =====
     const translations = {
-      tr: { menuTitle:"NEFES SWEETS ", categories:{ VIP:"VIP", ColdDrink:"Soğuk İçecekler", "Hot Drinks":"Sıcak İçecekler", Cakes:"Pastalar", Smothy:"Smoothie", Mohito:"Mojito", Creap:"Creap", Organicjuice:"Organik Meyve Suyu", Conafe:"Künefe", Milkshake:"Milk Shake", Icecream:"Dondurma", Baklava:"Baklava"} },
-      ku: { menuTitle:"نەفەس سویت",  categories:{ VIP:" ڤیپ", ColdDrink:"ڤەخارنێت تەزی", "Hot Drinks":"ڤەخارنێت گەرم", Cakes:"کێک", Smothy:"سموزی", Mohito:"موهیتو", Creap:"کریپ", Organicjuice:"شەربەت طەبیعی", Conafe:"کونافە", Milkshake:"میلک شیک", Icecream:"اسکریم", Baklava:"بەقلاوە"} }
+      tr: { menuTitle:"NEFES SWEETS",  categories:{ VIP:"VIP", ColdDrink:"Soğuk İçecekler", "Hot Drinks":"Sıcak İçecekler", Cakes:"Pastalar", Smothy:"Smoothie", Mohito:"Mojito", Creap:"Creap", Organicjuice:"Organik Meyve Suyu", Conafe:"Künefe", Milkshake:"Milk Shake", Icecream:"Dondurma", Baklava:"Baklava"} },
+      ku: { menuTitle:"نەفەس سویت",  categories:{ VIP:"ڤیپ", ColdDrink:"ڤەخارنێت تەزی", "Hot Drinks":"ڤەخارنێت گەرم", Cakes:"کێک", Smothy:"سموزی", Mohito:"موهیتو", Creap:"کریپ", Organicjuice:"شەربەت طەبیعی", Conafe:"کونافە", Milkshake:"میلک شیک", Icecream:"ئایس کریم", Baklava:"بەقلاوە"} }
     };
 
     let currentLang = 'tr';
@@ -257,107 +382,61 @@
     let modalItem = null;
     let skeletonTimeout = null;
 
-    // ---------- CATEGORY IMAGES (VIP uses video files) ----------
+    // ===== CATEGORY IMAGES (VIP video) =====
     const categoryImages = {
       VIP: ['video/1.MOV', 'video/2.MOV', 'video/3.MOV', 'video/5.MOV', 'video/6.MOV', 'video/7.MOV', 'video/8.MOV'],
-      ColdDrink: ['image/colddrink/colddrink1.jpg', 'image/colddrink/colddrink2.jpg', 'image/colddrink/colddrink3.jpg', 'image/colddrink/colddrink4.jpg', 'image/colddrink/colddrink5.jpg', 'image/colddrink/colddrink6.jpg', 'image/colddrink/colddrink7.jpg', 'image/colddrink/colddrink8.jpg', 'image/colddrink/colddrink9.jpg', 'image/colddrink/colddrink10.jpg', 'image/colddrink/colddrink11.jpg', 'image/colddrink/colddrink12.jpg', 'image/colddrink/colddrink13.jpg'],
-      'Hot Drinks': ['image/hotdrink/hotdrink1.jpg', 'image/hotdrink/hotdrink2.jpg', 'image/hotdrink/hotdrink3.jpg', 'image/hotdrink/hotdrink4.jpg', 'image/hotdrink/hotdrink5.jpg', 'image/hotdrink/hotdrink6.jpg', 'image/hotdrink/hotdrink7.jpg', 'image/hotdrink/hotdrink8.jpg', 'image/hotdrink/hotdrink9.jpg', 'image/hotdrink/hotdrink10.jpg', 'image/hotdrink/hotdrink11.jpg', 'image/hotdrink/hotdrink12.jpg', 'image/hotdrink/hotdrink13.jpg', 'image/hotdrink/hotdrink14.jpg', 'image/hotdrink/hotdrink15.jpg', 'image/hotdrink/hotdrink16.jpg'],
-      Cakes: ['image/cake/cake1.jpg', 'image/cake/cake2.jpg', 'image/cake/cake3.jpg', 'image/cake/cake4.jpg', 'image/cake/cake5.jpg', 'image/cake/cake6.jpg', 'image/cake/cake7.jpg', 'image/cake/cake8.jpg', 'image/cake/cake9.jpg', 'image/cake/cake10.jpg', 'image/cake/cake11.jpg', 'image/cake/cake12.jpg', 'image/cake/cake14.jpg', 'image/cake/cake15.jpg', 'image/cake/cake16.jpg', 'image/cake/cake17.jpg', 'image/cake/cake18.jpg', 'image/cake/cake19.jpg', 'image/cake/cake20.jpg', 'image/cake/cake21.jpg', 'image/cake/cake22.jpg', 'image/cake/cake23.jpg', 'image/cake/cake24.jpg', 'image/cake/cake25.jpg', 'image/cake/cake26.jpg'],
-      Smothy: ['image/smoothie/smoothie1.jpg', 'image/smoothie/smoothie2.jpg', 'image/smoothie/smoothie3.jpg', 'image/smoothie/smoothie4.jpg', 'image/smoothie/smoothie5.jpg', 'image/smoothie/smoothie6.jpg', 'image/smoothie/smoothie7.webp'],
-      Mohito: ['image/mohito/mohito1.jpg', 'image/mohito/mohito2.jpg', 'image/mohito/mohito3.jpg', 'image/mohito/mohito4.jpg', 'image/mohito/mohito5.jpg', 'image/mohito/mohito6.jpg', 'image/mohito/mohito7.jpg', 'image/mohito/mohito8.jpg', 'image/mohito/mohito9.jpg', 'image/mohito/mohito10.jpg', 'image/mohito/mohito11.jpg'],
-      Creap: ['image/crepe/crepe1.jpg', 'image/crepe/crepe2.jpg', 'image/crepe/crepe3.jpg', 'image/crepe/crepe4.jpg', 'image/crepe/crepe5.jpg', 'image/crepe/crepe6.jpg', 'image/crepe/crepe7.jpg', 'image/crepe/crepe8.jpg', 'image/crepe/crepe9.jpg', 'image/crepe/wafel1.jpg', 'image/crepe/wafel2.jpg', 'image/crepe/wafel3.jpg', 'image/crepe/wafel4.jpg', 'image/crepe/wafel5.jpg', 'image/crepe/pankik5.jpg', 'image/crepe/pankik2.jpg'],
-      Organicjuice: ['image/orginaldrink/1.jpg', 'image/orginaldrink/2.jpg', 'image/orginaldrink/3.jpg', 'image/orginaldrink/4.jpg', 'image/orginaldrink/5.jpg', 'image/orginaldrink/6.jpg', 'image/orginaldrink/7.jpg', 'image/orginaldrink/8.jpg', 'image/orginaldrink/9.jpg', 'image/orginaldrink/10.jpg'],
-      Conafe: ['image/conafe/1.jpg', 'image/conafe/2.jpg', 'image/conafe/3.jpg', 'image/conafe/4.jpg'],
-      Milkshake: ['image/milkshake/milkshake1.jpg', 'image/milkshake/milkshake2.jpg', 'image/milkshake/milkshake3.jpg', 'image/milkshake/milkshake4.jpg', 'image/milkshake/milkshake5.jpg', 'image/milkshake/milkshake6.jpg', 'image/milkshake/milkshake7.jpg', 'image/milkshake/milkshake8.jpg', 'image/milkshake/milkshake9.jpg'],
-      Icecream: ['image/icecrea/3.jpg', 'image/icecrea/4.jpg', 'image/icecrea/5.jpg', 'image/icecrea/6.jpg', 'image/icecrea/7.jpg', 'image/icecrea/8.jpg', 'image/icecrea/9.jpg', 'image/icecrea/1.jpg', 'image/icecrea/2.jpg'],
-      Baklava: ['image/baklava/1.jpg', 'image/baklava/2.jpg', 'image/baklava/3.jpg', 'image/baklava/4.jpg', 'image/baklava/5.jpg', 'image/baklava/6.jpg']
+      ColdDrink: ['image/colddrink/colddrink1.jpg','image/colddrink/colddrink2.jpg','image/colddrink/colddrink3.jpg','image/colddrink/colddrink4.jpg','image/colddrink/colddrink5.jpg','image/colddrink/colddrink6.jpg','image/colddrink/colddrink7.jpg','image/colddrink/colddrink8.jpg','image/colddrink/colddrink9.jpg','image/colddrink/colddrink10.jpg','image/colddrink/colddrink11.jpg','image/colddrink/colddrink12.jpg','image/colddrink/colddrink13.jpg'],
+      'Hot Drinks': ['image/hotdrink/hotdrink1.jpg','image/hotdrink/hotdrink2.jpg','image/hotdrink/hotdrink3.jpg','image/hotdrink/hotdrink4.jpg','image/hotdrink/hotdrink5.jpg','image/hotdrink/hotdrink6.jpg','image/hotdrink/hotdrink7.jpg','image/hotdrink/hotdrink8.jpg','image/hotdrink/hotdrink9.jpg','image/hotdrink/hotdrink10.jpg','image/hotdrink/hotdrink11.jpg','image/hotdrink/hotdrink12.jpg','image/hotdrink/hotdrink13.jpg','image/hotdrink/hotdrink14.jpg','image/hotdrink/hotdrink15.jpg','image/hotdrink/hotdrink16.jpg'],
+      Cakes: ['image/cake/cake1.jpg','image/cake/cake2.jpg','image/cake/cake3.jpg','image/cake/cake4.jpg','image/cake/cake5.jpg','image/cake/cake6.jpg','image/cake/cake7.jpg','image/cake/cake8.jpg','image/cake/cake9.jpg','image/cake/cake10.jpg','image/cake/cake11.jpg','image/cake/cake12.jpg','image/cake/cake14.jpg','image/cake/cake15.jpg','image/cake/cake16.jpg','image/cake/cake17.jpg','image/cake/cake18.jpg','image/cake/cake19.jpg','image/cake/cake20.jpg','image/cake/cake21.jpg','image/cake/cake22.jpg','image/cake/cake23.jpg','image/cake/cake24.jpg','image/cake/cake25.jpg','image/cake/cake26.jpg'],
+      Smothy: ['image/smoothie/smoothie1.jpg','image/smoothie/smoothie2.jpg','image/smoothie/smoothie3.jpg','image/smoothie/smoothie4.jpg','image/smoothie/smoothie5.jpg','image/smoothie/smoothie6.jpg','image/smoothie/smoothie7.webp'],
+      Mohito: ['image/mohito/mohito1.jpg','image/mohito/mohito2.jpg','image/mohito/mohito3.jpg','image/mohito/mohito4.jpg','image/mohito/mohito5.jpg','image/mohito/mohito6.jpg','image/mohito/mohito7.jpg','image/mohito/mohito8.jpg','image/mohito/mohito9.jpg','image/mohito/mohito10.jpg','image/mohito/mohito11.jpg'],
+      Creap: ['image/crepe/crepe1.jpg','image/crepe/crepe2.jpg','image/crepe/crepe3.jpg','image/crepe/crepe4.jpg','image/crepe/crepe5.jpg','image/crepe/crepe6.jpg','image/crepe/crepe7.jpg','image/crepe/crepe8.jpg','image/crepe/crepe9.jpg','image/crepe/wafel1.jpg','image/crepe/wafel2.jpg','image/crepe/wafel3.jpg','image/crepe/wafel4.jpg','image/crepe/wafel5.jpg','image/crepe/pankik5.jpg','image/crepe/pankik2.jpg'],
+      Organicjuice: ['image/orginaldrink/1.jpg','image/orginaldrink/2.jpg','image/orginaldrink/3.jpg','image/orginaldrink/4.jpg','image/orginaldrink/5.jpg','image/orginaldrink/6.jpg','image/orginaldrink/7.jpg','image/orginaldrink/8.jpg','image/orginaldrink/9.jpg','image/orginaldrink/10.jpg'],
+      Conafe: ['image/conafe/1.jpg','image/conafe/2.jpg','image/conafe/3.jpg','image/conafe/4.jpg'],
+      Milkshake: ['image/milkshake/milkshake1.jpg','image/milkshake/milkshake2.jpg','image/milkshake/milkshake3.jpg','image/milkshake/milkshake4.jpg','image/milkshake/milkshake5.jpg','image/milkshake/milkshake6.jpg','image/milkshake/milkshake7.jpg','image/milkshake/milkshake8.jpg','image/milkshake/milkshake9.jpg'],
+      Icecream: ['image/icecrea/3.jpg','image/icecrea/4.jpg','image/icecrea/5.jpg','image/icecrea/6.jpg','image/icecrea/7.jpg','image/icecrea/8.jpg','image/icecrea/9.jpg','image/icecrea/1.jpg','image/icecrea/2.jpg'],
+      Baklava: ['image/baklava/1.jpg','image/baklava/2.jpg','image/baklava/3.jpg','image/baklava/4.jpg','image/baklava/5.jpg','image/baklava/6.jpg']
     };
 
-    // ---------- PRODUCT GENERATOR ----------
+    // ===== PRODUCT GENERATOR =====
     function generateSampleProducts() {
-      const products = [];
-      let pid = 1;
-      const categories = ['VIP', 'ColdDrink', 'Hot Drinks', 'Cakes', 'Smothy', 'Mohito', 'Creap', 'Organicjuice', 'Conafe', 'Milkshake', 'Icecream', 'Baklava'];
-
+      const products = []; let pid = 1;
+      const categories = ['VIP','ColdDrink','Hot Drinks','Cakes','Smothy','Mohito','Creap','Organicjuice','Conafe','Milkshake','Icecream','Baklava'];
       const nameTrMap = {
-        VIP: [],
-        ColdDrink: ['Kola', 'Fanta', 'Sprite', 'White Tiger', 'Smart', 'Redbull', 'Freez', 'Ice Coffee Americano', 'Ice Spanish Latte', 'Iced Mocha', 'Iced White Mocha', 'Ice Chocolate', 'Ice Coffee'],
-        'Hot Drinks': ['Pistachio Coffe', 'Oreo Coffe', 'Flat White Coffe', 'turk Coffe', 'Mocha Coffee', 'Cortado Coffe', 'Spanish Latte Coffee', 'White Mocha Coffee', 'Arabic Coffee', 'Avocado Coffe', 'Tea', 'Americano Coffee', 'Espresso Double Coffe', 'Espresso Single Coffe', 'France Coffe', 'Hot Chocolate'],
-        Cakes: ['Tramisu', 'ibiza', 'islak kek', 'Macaron', 'Ekler', 'Revani', 'Tralice', 'Sansebistian', 'lotus cizkek', 'Redwelet', 'Russi', 'çikolatalik cizkek', 'Havuçlu Cake', 'Panda Cake', 'Dunat Mehşi', 'Nefes Cake', 'Xış Xış', 'London Cake', 'Cake Glass', 'Cake Tirki', 'Cake Oreo', 'Malaga', 'Redwelet Cake', 'Çikolatalı 1 Lb', 'Uğur Böceği Cake'],
-        Smothy: ['Strawberry&Milk Smoothie', 'Strawberry Smoothie', 'Lichi Smoothie', 'Bluewberry Smoothie', 'Ananas Smoothie', 'Banana Smoothie', 'Gum Smoothie'],
-        Mohito: ['Lemon Mojito', 'Blue haway Mojito', 'Blackberry Mojito', 'Ananas Mojito', 'Coconut Mojito', 'Strawberry Mojito', 'Peach Mojito', 'rasberry Mojito', 'Pomegranate Mojito', 'Redbull Mojito', 'White Tiger Mojito'],
-        Creap: ['Sushi Creap', 'Bueno Creap', 'Kinder Creap', 'Mayti', 'Pistachio Creap', 'Lotus Creap', 'Creap Oreo', 'Pistachio Waffel', 'Nutilla Waffel', 'Lotus Waffel', 'Bill Waffel', 'Nutilla Pankek', 'Burger Waffel', 'Nutilla Crepe', 'Pistachio Pankek', 'Oreo Pankek'],
-        Organicjuice: ['Orange Juice', 'Lemon Juice', 'Kiwi Juice', 'Strawberry Juice', 'Banana Juice', 'Ananas Juice', 'Kiwi&Lemon Juice', 'Pomegranate Juice', 'Avocado Juice', 'Mango Juice'],
-        Conafe: ['Pestatio Konafe', 'Mshekl Konafe', 'Kaymak Konafe', 'Penir Konafe'],
-        Milkshake: ['Strawberry Milkshake', 'Blueberry Milkshake', 'Kinder Milkshake', 'Oreo Milkshake', 'Nutilla Milkshake', 'Lotus Milkshake', 'Pistachio Milkshake', 'Keramel Milkshake', 'Chocolate Milkshake'],
-        Icecream: ['Muz Dundurma', 'Pestatio Dundurma', 'Chikolata Dundurma', 'Bluberry Dundurma', 'Stawberry Dundurma', 'Mangu Dundurma', 'Limon Dundurma', 'Ezberi Portakal', 'Ezberi Bluberry&Strawberry'],
-        Baklava: ['midye Baklava 1 Lb', 'sade Baklava 1 Lb', 'sarma Baklava 1 Lb', 'diber dodagi Baklava 1 Lb', 'duner Baklava 1 Lb', 'Teshrif 2 Lb Baklava']
+        VIP: [], ColdDrink: ['Kola','Fanta','Sprite','White Tiger','Smart','Redbull','Freez','Ice Coffee Americano','Ice Spanish Latte','Iced Mocha','Iced White Mocha','Ice Chocolate','Ice Coffee'],
+        'Hot Drinks': ['Pistachio Coffe','Oreo Coffe','Flat White Coffe','turk Coffe','Mocha Coffee','Cortado Coffe','Spanish Latte Coffee','White Mocha Coffee','Arabic Coffee','Avocado Coffe','Tea','Americano Coffee','Espresso Double Coffe','Espresso Single Coffe','France Coffe','Hot Chocolate'],
+        Cakes: ['Tramisu','ibiza','islak kek','Macaron','Ekler','Revani','Tralice','Sansebistian','lotus cizkek','Redwelet','Russi','çikolatalik cizkek','Havuçlu Cake','Panda Cake','Dunat Mehşi','Nefes Cake','Xış Xış','London Cake','Cake Glass','Cake Tirki','Cake Oreo','Malaga','Redwelet Cake','Çikolatalı 1 Lb','Uğur Böceği Cake'],
+        Smothy: ['Strawberry&Milk Smoothie','Strawberry Smoothie','Lichi Smoothie','Bluewberry Smoothie','Ananas Smoothie','Banana Smoothie','Gum Smoothie'],
+        Mohito: ['Lemon Mojito','Blue haway Mojito','Blackberry Mojito','Ananas Mojito','Coconut Mojito','Strawberry Mojito','Peach Mojito','rasberry Mojito','Pomegranate Mojito','Redbull Mojito','White Tiger Mojito'],
+        Creap: ['Sushi Creap','Bueno Creap','Kinder Creap','Mayti','Pistachio Creap','Lotus Creap','Creap Oreo','Pistachio Waffel','Nutilla Waffel','Lotus Waffel','Bill Waffel','Nutilla Pankek','Burger Waffel','Nutilla Crepe','Pistachio Pankek','Oreo Pankek'],
+        Organicjuice: ['Orange Juice','Lemon Juice','Kiwi Juice','Strawberry Juice','Banana Juice','Ananas Juice','Kiwi&Lemon Juice','Pomegranate Juice','Avocado Juice','Mango Juice'],
+        Conafe: ['Pestatio Konafe','Mshekl Konafe','Kaymak Konafe','Penir Konafe'],
+        Milkshake: ['Strawberry Milkshake','Blueberry Milkshake','Kinder Milkshake','Oreo Milkshake','Nutilla Milkshake','Lotus Milkshake','Pistachio Milkshake','Keramel Milkshake','Chocolate Milkshake'],
+        Icecream: ['Muz Dundurma','Pestatio Dundurma','Chikolata Dundurma','Bluberry Dundurma','Stawberry Dundurma','Mangu Dundurma','Limon Dundurma','Ezberi Portakal','Ezberi Bluberry&Strawberry'],
+        Baklava: ['midye Baklava 1 Lb','sade Baklava 1 Lb','sarma Baklava 1 Lb','diber dodagi Baklava 1 Lb','duner Baklava 1 Lb','Teshrif 2 Lb Baklava']
       };
       const nameKuMap = {
-        VIP: [],
-        ColdDrink: ['کوکا کولا', 'فانتا', 'سپرایت', 'وایت تایگر', 'سمارت', 'رێد بوول', 'فریز', 'ایس کۆفی آمریکانو', 'ایس اسپانیش لاتێ', 'ایس مۆچا', 'ایس وایت مۆچا', 'ایس چوکلێت', 'ایس کوفی'],
-        'Hot Drinks': ['قەهوە فستەق', 'وریو کوفی', 'فلات وایت کوفی', 'تورک کوفی', 'موکا کوفی', 'کورتادو کوفی', 'سپانێش لاتێ کوفی', 'وایت موکا کوفی', 'عەرەبی کوفی', 'اڤوگادو کوفی', 'چا', 'امریکانو کوفی', 'اسپرێسو دەبل کوفی', 'اسپریسو سینگل کوفی', 'فرەنسی کوفی', 'هوت چوکلێت'],
-        Cakes: ['ترامیسو', 'یبیزا', 'یسلاک کێک', 'ماکارون', 'اکلەر', 'ریڤانی', 'ترالیچە', 'سانسێبیستیان', 'لوتوس کێک', 'رێدوالێت', 'رووسی', 'چوکلێت كێک', 'کێک گێزەر', 'پاندا', 'دونات مهشی', 'کێک نەفەس', 'خش خش', 'کێک لەندەن', 'کێک گلاس', 'کێک تیرکی', 'کێک وریو', 'مالاگا', 'کێک رێدوالێت', 'کێک چیکولاتا', 'کێک خالخالوک'],
-        Smothy: ['سموزی فراولە و موز', 'سموزی فراولە', 'سموزی لیچی', 'سموزی بلوبێری', 'سموزی اناناس', 'سموزی موز', 'سموزی علك'],
-        Mohito: ['موهیتو لیمون', 'موهیتو بلو هاوای', 'موهیتو بلاک بێری', 'موهیتو انەناس', 'موهیتو گیز', 'موهیتو فراولە', 'موهیتو خوخ', 'موهیتو راسبێری', 'موهیتو هنار', 'موهیتو رێدبول', 'موهیتو وایت تایگەر'],
-        Creap: ['کریپ سوشی', 'کریپ بوینو', 'کریپ کیندەر', 'مایتی', 'کریپ فستەق', 'کریپ لوتوس', 'کریپ اوریو', 'وافل فستەق', 'وافل نوتێلا', 'وافل لوتوس', 'وافل بێل', 'پانکێک نوتێلا', 'بورگەر وافل', 'نوتێلا کریپ', 'پانکێک فستەق', 'پانکێک اوریو'],
-        Organicjuice: ['شەربەت پرتەقال', 'شەربەت لیمون', 'شەربەت کیوی', 'شەربەت فراولە', 'شەربەت موز', 'شەربەت اناناس', 'شەربەت کیوی&لیمون', 'شەربەت هنار', 'شەربەت اڤوگادو', 'شەربەت مانگو'],
-        Conafe: ['کونافە فستەق', 'کونافە مشەکل', 'کونافە قەیماخ', 'کونافە پەنیر'],
-        Milkshake: ['فراولە میلکشێک', 'بلوبێری میلکشێک', 'کیندەر میلکشێک', 'وریو میلکشێک', 'نوتێلا میلکشێک', 'لوتوس میلکشێک', 'فستەق میلکشێک', 'کەرامێل میلکشێک', 'چوکلێت میلکشێک'],
-        Icecream: ['دودرما موز', 'دودرما فستەقێ', 'دودرما چیکولاتا', 'دودرما بلوبێری', 'دودرما فراولە', 'دودرما مانگو', 'دودرما لێمون', 'ازبەری پرتەقال', 'ازبەری بلوفێری&فراولە'],
-        Baklava: ['میدیا بەقلاوە 1 لب', 'سادە بەقلاوە 1 لب', 'سارما بەقلاوە 1 لب', 'دیلبەر دۆداێ بەقلاوە 1 لب', 'دونەر بەقلاوە 1 لب', 'تەشریف 2 لب بەقلاوە']
+        VIP: [], ColdDrink: ['کوکا کولا','فانتا','سپرایت','وایت تایگر','سمارت','رێد بوول','فریز','ئایس کۆفی ئەمریکانو','ئایس ئیسپانیل لاتێ','ئایس مۆچا','ئایس وایت مۆچا','ئایس چوکلێت','ئایس کوفی'],
+        'Hot Drinks': ['قەهوە فستەق','ئوریو کوفی','فلات وایت کوفی','تورک کوفی','موکا کوفی','کورتادو کوفی','ئیسپانێش لاتێ کوفی','وایت موکا کوفی','عەرەبی کوفی','ئاڤوگادو کوفی','چا','ئەمریکانو کوفی','ئەسپرێسو دەبل کوفی','ئەسپریسو سینگل کوفی','فەرەنسی کوفی','هۆت چوکلێت'],
+        Cakes: ['ترامیسو','ئیبیزا','ئیسلاک کێک','ماکارون','ئەکلەر','ریڤانی','ترالیچە','سانسێبیستیان','لوتوس کێک','رێدوالێت','رووسی','چوکلێت کێک','کێک گێزەر','پاندا','دونات مەشی','کێک نەفەس','خش خش','کێک لەندەن','کێک گلاس','کێک تیرکی','کێک ئوریو','مالاگا','کێک رێدوالێت','کێک چیکولاتا','کێک خالخالوک'],
+        Smothy: ['سموزی فراولە و موز','سموزی فراولە','سموزی لیچی','سموزی بلوبێری','سموزی ئەناناس','سموزی موز','سموزی عەلەک'],
+        Mohito: ['موهیتو لیمون','موهیتو بلو هاوای','موهیتو بلاک بێری','موهیتو ئەناناس','موهیتو گیز','موهیتو فراولە','موهیتو خوخ','موهیتو راسبێری','موهیتو هەنار','موهیتو رێدبوول','موهیتو وایت تایگەر'],
+        Creap: ['کریپ سوشی','کریپ بوینو','کریپ کیندەر','مایتی','کریپ فستەق','کریپ لوتوس','کریپ ئوریو','وافل فستەق','وافل نوتێلا','وافل لوتوس','وافل بێل','پانکێک نوتێلا','بورگەر وافل','نوتێلا کریپ','پانکێک فستەق','پانکێک ئوریو'],
+        Organicjuice: ['شەربەت پڕتەقال','شەربەت لیمون','شەربەت کیوی','شەربەت فراولە','شەربەت موز','شەربەت ئەناناس','شەربەت کیوی و لیمون','شەربەت هەنار','شەربەت ئاڤوگادو','شەربەت مانگو'],
+        Conafe: ['کونافە فستەق','کونافە مشەکل','کونافە قەیماخ','کونافە پەنیر'],
+        Milkshake: ['فراولە میلکشێک','بلوبێری میلکشێک','کیندەر میلکشێک','ئوریو میلکشێک','نوتێلا میلکشێک','لوتوس میلکشێک','فستەق میلکشێک','کەرامێل میلکشێک','چوکلێت میلکشێک'],
+        Icecream: ['دۆدرمای موز','دۆدرمای فستەق','دۆدرمای چیکولاتا','دۆدرمای بلوبێری','دۆدرمای فراولە','دۆدرمای مانگو','دۆدرمای لیمون','ئەزبەری پڕتەقال','ئەزبەری بلوبێری و فراولە'],
+        Baklava: ['میدیای بەقلاوە ۱ لە','سادە بەقلاوە ۱ لە','سارمای بەقلاوە ۱ لە','دیلبەر دۆدایی بەقلاوە ۱ لە','دونەری بەقلاوە ۱ لە','تەشریف ۲ لە بەقلاوە']
       };
+      const priceRanges = { VIP:[], ColdDrink:[1000,1000,1000,2000,2000,3000,2000,3000,3000,3000,3000,3000,3000], 'Hot Drinks':[3000,3000,3000,2000,3000,3000,3000,3000,2000,4000,500,3000,2000,1500,3000,3000], Cakes:[2000,3000,1500,500,500,1500,1000,3000,2000,2000,2000,2000,2000,3000,1500,3000,1000,3000,2000,2000,2000,3000,2000,2000,3000], Smothy:[4000,4000,4000,4000,4000,4000,4000], Mohito:[3000,3000,3000,3000,3000,3000,3000,3000,3000,4000,4000], Creap:[5000,5000,5000,6000,5000,5000,5000,5000,5000,5000,4000,5000,5000,4000,5000,5000], Organicjuice:[3000,3000,3000,3000,3000,3000,3000,3000,4000,5000], Conafe:[5000,6000,7000,5000], Milkshake:[3000,3000,3000,3000,3000,3000,3000,3000,3000], Icecream:[500,500,500,500,500,500,500,1000,1000], Baklava:[1000,1000,1000,1000,1000,5000] };
 
-      const priceRanges = {
-        VIP: [],
-        ColdDrink: [1000, 1000, 1000, 2000, 2000, 3000, 2000, 3000, 3000, 3000, 3000, 3000, 3000],
-        'Hot Drinks': [3000, 3000, 3000, 2000, 3000, 3000, 3000, 3000, 2000, 4000, 500, 3000, 2000, 1500, 3000, 3000],
-        Cakes: [2000, 3000, 1500, 500, 500, 1500, 1000, 3000, 2000, 2000, 2000, 2000, 2000, 3000, 1500, 3000, 1000, 3000, 2000, 2000, 2000, 3000, 2000, 2000, 3000],
-        Smothy: [4000, 4000, 4000, 4000, 4000, 4000, 4000],
-        Mohito: [3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 4000, 4000],
-        Creap: [5000, 5000, 5000, 6000, 5000, 5000, 5000, 5000, 5000, 5000, 4000, 5000, 5000, 4000, 5000, 5000],
-        Organicjuice: [3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 4000, 5000],
-        Conafe: [5000, 6000, 7000, 5000],
-        Milkshake: [3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000],
-        Icecream: [500, 500, 500, 500, 500, 500, 500, 1000, 1000],
-        Baklava: [1000, 1000, 1000, 1000, 1000, 5000]
-      };
-
-      // VIP video items
-      const vipVideoCount = 7;
-      const vipImages = categoryImages.VIP;
-      for (let i = 0; i < vipVideoCount; i++) {
-        const imgIndex = i % vipImages.length;
-        products.push({
-          id: pid++,
-          cat: 'VIP',
-          nameTr: 'VIP Video ' + (i+1),
-          nameKu: 'ڤیدیۆی ڤیپ ' + (i+1),
-          price: undefined,
-          img: vipImages[imgIndex],
-          isVideo: true
-        });
-      }
-
-      // Other categories
+      const vipVideos = categoryImages.VIP;
+      for (let i=0; i<7; i++) { products.push({ id:pid++, cat:'VIP', nameTr:'VIP Video '+(i+1), nameKu:'ڤیدیۆی ڤیپ '+(i+1), price:undefined, img:vipVideos[i%vipVideos.length], isVideo:true }); }
       for (const cat of categories) {
-        if (cat === 'VIP') continue;
-        const images = categoryImages[cat];
-        const namesTr = nameTrMap[cat];
-        const namesKu = nameKuMap[cat];
-        const prices = priceRanges[cat];
-        const count = Math.min(namesTr.length, namesKu.length, prices.length);
-        for (let i = 0; i < count; i++) {
-          const imgIndex = i % images.length;
-          products.push({
-            id: pid++,
-            cat: cat,
-            nameTr: namesTr[i],
-            nameKu: namesKu[i],
-            price: prices[i],
-            img: images[imgIndex],
-            isVideo: false
-          });
+        if (cat==='VIP') continue;
+        const images = categoryImages[cat], namesTr = nameTrMap[cat], namesKu = nameKuMap[cat], prices = priceRanges[cat];
+        for (let i=0; i<Math.min(namesTr.length, namesKu.length, prices.length); i++) {
+          products.push({ id:pid++, cat, nameTr:namesTr[i], nameKu:namesKu[i], price:prices[i], img:images[i%images.length], isVideo:false });
         }
       }
       return products;
@@ -365,22 +444,8 @@
 
     let dishesData = generateSampleProducts();
 
-    // icons
     const icons = {
-     VIP: `
-<span style="
-    display:inline-block;
-    padding:4px 10px;
-    background:linear-gradient(135deg,#FFD700,#FFA500);
-    color:#000;
-    font-size:18px;
-    font-weight:700;
-    border-radius:20px;
-    letter-spacing:1px;
-    box-shadow:0 2px 8px rgba(0,0,0,.2);
-">
-    VIP
-</span>`,
+      VIP: `<span style="display:inline-block; padding:2px 10px; background:linear-gradient(135deg,#FFD700,#FFA500); color:#000; font-size:16px; font-weight:700; border-radius:40px; letter-spacing:0.5px;">VIP</span>`,
       ColdDrink: `<img src="image/drink.png" class="menu-icon" onerror="this.style.display='none'">`,
       HotDrinks: `<img src="image/coffee-cup.png" class="menu-icon" onerror="this.style.display='none'">`,
       Cakes: `<img src="image/cake.png" class="menu-icon" onerror="this.style.display='none'">`,
@@ -395,133 +460,70 @@
     };
 
     const categoriesList = [
-      { id: 'VIP', icon: 'VIP' }, { id: 'ColdDrink', icon: 'ColdDrink' }, { id: 'Hot Drinks', icon: 'HotDrinks' }, { id: 'Cakes', icon: 'Cakes' },
-      { id: 'Smothy', icon: 'Smothy' }, { id: 'Mohito', icon: 'Mohito' }, { id: 'Creap', icon: 'Creap' }, { id: 'Organicjuice', icon: 'Organicjuice' },
-      { id: 'Conafe', icon: 'Conafe' }, { id: 'Milkshake', icon: 'Milkshake' }, { id: 'Icecream', icon: 'Icecream' }, { id: 'Baklava', icon: 'Baklava' }
+      { id:'VIP', icon:'VIP' }, { id:'ColdDrink', icon:'ColdDrink' }, { id:'Hot Drinks', icon:'HotDrinks' }, { id:'Cakes', icon:'Cakes' },
+      { id:'Smothy', icon:'Smothy' }, { id:'Mohito', icon:'Mohito' }, { id:'Creap', icon:'Creap' }, { id:'Organicjuice', icon:'Organicjuice' },
+      { id:'Conafe', icon:'Conafe' }, { id:'Milkshake', icon:'Milkshake' }, { id:'Icecream', icon:'Icecream' }, { id:'Baklava', icon:'Baklava' }
     ];
 
-    function getDishName(item) {
-      if (item.isVideo) return '🎬 ' + (currentLang === 'tr' ? item.nameTr : item.nameKu);
-      return currentLang === 'tr' ? item.nameTr : item.nameKu;
-    }
-    function getDishDesc(item) {
-      if (item.isVideo) return '';
-      return currentLang === 'tr' ? (item.descTr || '') : (item.descKu || '');
-    }
-    function translateText(key, fallback) { return (translations[currentLang]?.[key] || fallback); }
+    function getDishName(item) { return item.isVideo ? '🎬 '+(currentLang==='tr'?item.nameTr:item.nameKu) : (currentLang==='tr'?item.nameTr:item.nameKu); }
+    function getDishDesc(item) { return item.isVideo ? '' : (currentLang==='tr'?(item.descTr||''):(item.descKu||'')); }
+    function translateText(key, fallback) { return translations[currentLang]?.[key] || fallback; }
 
     function renderCategories() {
       const el = document.getElementById('catScroll');
       const cats = translations[currentLang]?.categories || translations.tr.categories;
-      el.innerHTML = categoriesList.map(c => `<div class="cat-item ${c.id===activeCat?'active':''}" onclick="selectCat('${c.id}')"><span class="menu-icon" style="font-size:22px; line-height:1;">${icons[c.icon] ? icons[c.icon] : '🍽️'}</span><span>${cats[c.id] || c.id}</span></div>`).join('');
+      el.innerHTML = categoriesList.map(c => `<div class="cat-item ${c.id===activeCat?'active':''}" onclick="selectCat('${c.id}')"><span style="font-size:20px; line-height:1;">${icons[c.icon]||'🍽️'}</span><span>${cats[c.id]||c.id}</span></div>`).join('');
     }
 
     function selectCat(id) { activeCat = id; document.getElementById('searchInput').value = ''; renderMenu(); }
 
-    function renderMenu() {
-      renderCategories();
-      const filtered = dishesData.filter(d => d.cat === activeCat);
-      renderGrid(filtered);
-    }
+    function renderMenu() { renderCategories(); const filtered = dishesData.filter(d => d.cat === activeCat); renderGrid(filtered); }
 
-    // DESSERT-THEMED SKELETON LOADING
-    const dessertIcons = ['🍰', '🍰', '🍰', '🍰', '🍰', '🍰', '🍰', '🍰', '🍰', '🍰', '🍰', '🍰'];
-
+    // skeleton
+    const dessertIcons = ['🍰','🧁','🥧','🍫','🍩','🍪','🎂','🍭','🧇','🍦'];
     function renderSkeletons(count) {
       let html = '';
-      for (let i = 0; i < count; i++) {
-        const randomIcon = dessertIcons[Math.floor(Math.random() * dessertIcons.length)];
-        html += `
-          <div class="skeleton-card" style="cursor:default;">
-            <div class="skeleton-media">
-              <span class="skeleton-icon" style="font-size:54px; animation: floatDessert ${1.5 + Math.random() * 1.5}s ease-in-out infinite; animation-delay: ${Math.random() * 0.5}s;">${randomIcon}</span>
-            </div>
-            <div class="skeleton-body">
-              <div class="skeleton-text" style="width: ${60 + Math.random() * 35}%;"></div>
-              <div class="skeleton-price" style="width: ${30 + Math.random() * 30}%;"></div>
-            </div>
-          </div>
-        `;
+      for (let i=0; i<count; i++) {
+        const randomIcon = dessertIcons[Math.floor(Math.random()*dessertIcons.length)];
+        html += `<div class="skeleton-card"><div class="skeleton-media"><span class="skeleton-icon" style="font-size:52px; animation: floatDessert ${1.4+Math.random()*1.6}s ease-in-out infinite;">${randomIcon}</span></div><div class="skeleton-body"><div class="skeleton-text" style="width:${60+Math.random()*35}%;"></div><div class="skeleton-price" style="width:${30+Math.random()*30}%;"></div></div></div>`;
       }
       return html;
     }
 
-    // Function to auto-play videos in the grid
     function setupVideoPlayers() {
       document.querySelectorAll('.food-card video').forEach(video => {
-        // Try to play the video
-        const playVideo = () => {
-          video.play().catch(() => {
-            // If autoplay fails, wait for user interaction
-            const playOnInteraction = () => {
-              video.play().catch(() => {});
-              document.removeEventListener('click', playOnInteraction);
-            };
-            document.addEventListener('click', playOnInteraction);
-          });
-        };
-        
-        // Handle visibility change to play when visible
+        const play = () => video.play().catch(() => {});
         const observer = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              video.play().catch(() => {});
-            } else {
-              video.pause();
-            }
-          });
-        }, { threshold: 0.3 });
-        
+          entries.forEach(entry => { if (entry.isIntersecting) play(); else video.pause(); });
+        }, { threshold:0.3 });
         observer.observe(video);
-        
-        // Also play on hover
-        video.addEventListener('mouseenter', () => {
-          video.play().catch(() => {});
-        });
-        video.addEventListener('mouseleave', () => {
-          video.pause();
-        });
-        
-        // Initial play attempt
-        playVideo();
+        video.addEventListener('mouseenter', play);
+        video.addEventListener('mouseleave', () => video.pause());
+        play();
       });
     }
 
     function renderGrid(items) {
       const grid = document.getElementById('foodGrid');
-      if (items.length === 0) { grid.innerHTML = `<div class="empty-state"><span class="icon">🍰</span><p>لڤان نێزیکا</p></div>`; return; }
-
-      // Show skeletons first with dessert icons
+      if (items.length===0) { grid.innerHTML = `<div class="empty-state" style="text-align:center;padding:60px 20px;color:#8a7a7e;"><span style="font-size:64px;display:block;margin-bottom:12px;">🍰</span><p>لڤان نێزیکا</p></div>`; return; }
       const skeletonCount = Math.min(items.length, 6);
       grid.innerHTML = renderSkeletons(skeletonCount);
-
-      // After a short delay, render actual content
       clearTimeout(skeletonTimeout);
       skeletonTimeout = setTimeout(() => {
         grid.innerHTML = items.map(d => {
           const name = getDishName(d);
-          const price = d.price !== undefined ? `${d.price.toLocaleString()} IQD` : '🎬 VIP Video';
+          const price = d.price!==undefined ? `${d.price.toLocaleString()} IQD` : '🎬 VIP Video';
           let mediaHtml;
-          if (d.isVideo) {
-            mediaHtml = `<video src="${d.img}" muted playsinline loop preload="metadata" onclick="openModal(${d.id})" style="width:100%;aspect-ratio:1/1;object-fit:cover;display:block;background:#000;cursor:pointer;"></video>`;
-          } else {
-            mediaHtml = `<img src="${d.img}" alt="${name}" loading="lazy" onclick="openModal(${d.id})" style="width:100%;aspect-ratio:1/1;object-fit:cover;display:block;cursor:pointer;">`;
-          }
+          if (d.isVideo) mediaHtml = `<video src="${d.img}" muted playsinline loop preload="metadata" onclick="openModal(${d.id})" style="width:100%;aspect-ratio:1/1;object-fit:cover;display:block;background:#f3e9ec;cursor:pointer;"></video>`;
+          else mediaHtml = `<img src="${d.img}" alt="${name}" loading="lazy" onclick="openModal(${d.id})" style="width:100%;aspect-ratio:1/1;object-fit:cover;display:block;cursor:pointer;">`;
           return `<div class="food-card">${mediaHtml}<div class="card-body"><div class="dish-name">${name}</div><div class="dish-price">${price}</div></div></div>`;
         }).join('');
-
-        // Setup video players for VIP videos
         setupVideoPlayers();
-
-        // Attach click events for non-video cards
-        document.querySelectorAll('.food-card').forEach((card, index) => {
-          const item = items[index];
-          if (!item) return;
-          if (!item.isVideo) {
-            card.onclick = () => openModal(item.id);
-          }
+        document.querySelectorAll('.food-card').forEach((card, idx) => {
+          const item = items[idx];
+          if (item && !item.isVideo) card.onclick = () => openModal(item.id);
         });
-      }, 600);
+      }, 500);
     }
 
     function filterDishes(q) {
@@ -535,27 +537,19 @@
       if (!modalItem) return;
       const container = document.getElementById('modalMediaContainer');
       if (modalItem.isVideo) {
-        container.innerHTML = `<video src="${modalItem.img}" controls autoplay muted playsinline style="width:100%;height:220px;object-fit:cover;border-radius:20px 20px 0 0;background:#000;"></video>`;
-        // Ensure video plays in modal
-        setTimeout(() => {
-          const vid = container.querySelector('video');
-          if (vid) vid.play().catch(() => {});
-        }, 100);
+        container.innerHTML = `<video src="${modalItem.img}" controls autoplay muted playsinline style="width:100%;height:240px;object-fit:cover;border-radius:40px 40px 0 0;background:#f3e9ec;"></video>`;
+        setTimeout(() => { const v = container.querySelector('video'); if(v) v.play().catch(()=>{}); }, 100);
       } else {
-        container.innerHTML = `<img src="${modalItem.img}" alt="${getDishName(modalItem)}" style="width:100%;height:220px;object-fit:cover;border-radius:20px 20px 0 0;">`;
+        container.innerHTML = `<img src="${modalItem.img}" alt="${getDishName(modalItem)}" style="width:100%;height:240px;object-fit:cover;border-radius:40px 40px 0 0;">`;
       }
-      document.getElementById('modalName').textContent = getDishName(modalItem) || 'VIP Video';
-      document.getElementById('modalPrice').textContent = modalItem.price !== undefined ? `${modalItem.price.toLocaleString()} IQD` : '';
-      document.getElementById('modalDesc').textContent = getDishDesc(modalItem) || '';
+      document.getElementById('modalName').textContent = getDishName(modalItem);
+      document.getElementById('modalPrice').textContent = modalItem.price!==undefined ? `${modalItem.price.toLocaleString()} IQD` : '';
+      document.getElementById('modalDesc').textContent = getDishDesc(modalItem);
       document.getElementById('itemModal').classList.add('open');
     }
 
     function closeModal(e) { if (e.target === document.getElementById('itemModal')) closeModalDirect(); }
-    function closeModalDirect() { 
-      document.getElementById('itemModal').classList.remove('open');
-      const vid = document.querySelector('#modalMediaContainer video');
-      if (vid) vid.pause();
-    }
+    function closeModalDirect() { document.getElementById('itemModal').classList.remove('open'); const v = document.querySelector('#modalMediaContainer video'); if(v) v.pause(); }
 
     function addToCartFromModal() {
       if (modalItem) {
@@ -563,24 +557,20 @@
         const fab = document.getElementById('cartFab');
         fab.style.display = 'flex';
         document.getElementById('cartCount').textContent = cartCount;
-        showToast(translateText('cartToast', 'Added to order ✓'));
         closeModalDirect();
       }
     }
 
-    let toastTimer;
     function showToast(msg) {
       const t = document.getElementById('toast');
       t.textContent = msg;
       t.classList.add('show');
       clearTimeout(toastTimer);
-      toastTimer = setTimeout(() => t.classList.remove('show'), 2200);
+      toastTimer = setTimeout(() => t.classList.remove('show'), 2000);
     }
+    let toastTimer;
 
-    function submitReservation() {
-      showToast(translateText('reserveToast', 'Reservation confirmed! 🎉'));
-      setTimeout(() => showScreen('landing'), 1800);
-    }
+    function submitReservation() { showToast(translateText('reserveToast','Rezervasyon onaylandı! 🎉')); setTimeout(()=>showScreen('landing'), 1600); }
 
     function showScreen(id) {
       document.querySelectorAll('.screen').forEach(s => s.classList.add('hidden'));
@@ -592,53 +582,49 @@
       currentLang = lang;
       updateUILang();
       if (!document.getElementById('menu').classList.contains('hidden')) renderMenu();
-      if (modalItem) {
-        document.getElementById('modalName').textContent = getDishName(modalItem) || 'VIP Video';
-        document.getElementById('modalDesc').textContent = getDishDesc(modalItem) || '';
-      }
+      if (modalItem) { document.getElementById('modalName').textContent = getDishName(modalItem); document.getElementById('modalDesc').textContent = getDishDesc(modalItem); }
     }
 
     function updateUILang() {
-      document.getElementById('menuTitle').textContent = translateText('menuTitle', 'NEFES SWEETS');
-      document.getElementById('reserveTitle').textContent = translateText('reserveTitle', 'Reserve a Table');
-      document.getElementById('labelName').textContent = translateText('labelName', 'Full Name');
-      document.getElementById('labelPhone').textContent = translateText('labelPhone', 'Phone Number');
-      document.getElementById('labelDate').textContent = translateText('labelDate', 'Date');
-      document.getElementById('labelTime').textContent = translateText('labelTime', 'Time');
-      document.getElementById('labelGuests').textContent = translateText('labelGuests', 'Number of Guests');
-      document.getElementById('labelRequests').textContent = translateText('labelRequests', 'Special Requests');
-      document.getElementById('submitReserveBtn').textContent = translateText('confirmBtn', 'Confirm Reservation');
-      document.getElementById('searchInput').placeholder = translateText('searchPlaceholder', 'Search dishes...');
-      const langLabel = currentLang === 'tr' ? 'Türkçe ▾' : 'کوردی ▾';
-      document.getElementById('globalLangLabel').textContent = langLabel;
-      document.getElementById('menuLangLabel').textContent = langLabel;
-      document.getElementById('menuBtnLanding').innerHTML = currentLang === 'tr' ? 'Menü' : 'مینیو';
+      document.getElementById('menuTitle').textContent = translateText('menuTitle','NEFES SWEETS');
+      document.getElementById('reserveTitle').textContent = translateText('reserveTitle','Reserve a Table');
+      document.getElementById('labelName').textContent = translateText('labelName','Full Name');
+      document.getElementById('labelPhone').textContent = translateText('labelPhone','Phone Number');
+      document.getElementById('labelDate').textContent = translateText('labelDate','Date');
+      document.getElementById('labelTime').textContent = translateText('labelTime','Time');
+      document.getElementById('labelGuests').textContent = translateText('labelGuests','Number of Guests');
+      document.getElementById('labelRequests').textContent = translateText('labelRequests','Special Requests');
+      document.getElementById('submitReserveBtn').textContent = translateText('confirmBtn','Confirm Reservation');
+      document.getElementById('searchInput').placeholder = translateText('searchPlaceholder','Search dishes...');
+      const lbl = currentLang==='tr' ? 'Türkçe ▾' : 'کوردی ▾';
+      document.getElementById('globalLangLabel').textContent = lbl;
+      document.getElementById('menuLangLabel').textContent = lbl;
+      document.getElementById('menuBtnLanding').innerHTML = currentLang==='tr' ? 'Menü' : 'مینیو';
       renderCategories();
     }
 
-    // Event listeners
+    // ===== EVENTS =====
     document.getElementById('menuBtnLanding').onclick = () => showScreen('menu');
 
-    const globalBtnWrapper = document.getElementById('globalLangBtnWrapper');
-    globalBtnWrapper.onclick = (e) => { e.stopPropagation(); globalBtnWrapper.classList.toggle('active'); };
+    const globalWrapper = document.getElementById('globalLangBtnWrapper');
+    globalWrapper.onclick = (e) => { e.stopPropagation(); globalWrapper.classList.toggle('active'); };
     document.querySelectorAll('#globalLangDropdown div').forEach(opt => {
-      opt.onclick = (e) => { e.stopPropagation(); const lang = opt.getAttribute('data-lang'); setLanguage(lang); globalBtnWrapper.classList.remove('active'); };
+      opt.onclick = (e) => { e.stopPropagation(); setLanguage(opt.getAttribute('data-lang')); globalWrapper.classList.remove('active'); };
     });
 
     const menuLangBar = document.getElementById('menuLangBar');
     menuLangBar.onclick = (e) => { e.stopPropagation(); menuLangBar.classList.toggle('active'); };
     document.querySelectorAll('#menuLangDropdown div').forEach(opt => {
-      opt.onclick = (e) => { e.stopPropagation(); const lang = opt.getAttribute('data-lang'); setLanguage(lang); menuLangBar.classList.remove('active'); };
+      opt.onclick = (e) => { e.stopPropagation(); setLanguage(opt.getAttribute('data-lang')); menuLangBar.classList.remove('active'); };
     });
 
-    document.addEventListener('click', () => { globalBtnWrapper?.classList.remove('active'); menuLangBar?.classList.remove('active'); });
+    document.addEventListener('click', () => { globalWrapper?.classList.remove('active'); menuLangBar?.classList.remove('active'); });
 
     document.getElementById('foodGridWrap').addEventListener('scroll', function() {
-      const btn = document.getElementById('scrollTop');
-      btn.classList.toggle('visible', this.scrollTop > 200);
+      document.getElementById('scrollTop').classList.toggle('visible', this.scrollTop > 200);
     });
 
-    // Initial setup
+    // ===== INIT =====
     setLanguage('tr');
     renderCategories();
     renderMenu();
