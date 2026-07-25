@@ -372,8 +372,8 @@
   <script>
     // ===== TRANSLATIONS =====
     const translations = {
-      tr: { menuTitle:"NEFES SWEETS",  categories:{ VIP:"", ColdDrink:"Soğuk İçecekler", "Hot Drinks":"Sıcak İçecekler", Cakes:"Pastalar", Smothy:"Smoothie", Mohito:"Mojito", Creap:"Creap", Organicjuice:"Organik Meyve Suyu", Conafe:"Künefe", Milkshake:"Milk Shake", :"Dondurma", Baklava:"Baklava"} },
-      ku: { menuTitle:"نەفەس سویت",  categories:{ VIP:"", ColdDrink:"ڤەخارنێت تەزی", "Hot Drinks":"ڤەخارنێت گەرم", Cakes:"کێک", Smothy:"سموزی", Mohito:"موهیتو", Creap:"کریپ", Organicjuice:"شەربەت طەبیعی", Conafe:"کونافە", Milkshake:"میلک شیک", :"ئایس کریم", Baklava:"بەقلاوە"} }
+      tr: { menuTitle:"NEFES SWEETS",  categories:{ VIP:"VIP", ColdDrink:"Soğuk İçecekler", "Hot Drinks":"Sıcak İçecekler", Cakes:"Pastalar", Smothy:"Smoothie", Mohito:"Mojito", Creap:"Creap", Organicjuice:"Organik Meyve Suyu", Conafe:"Künefe", Milkshake:"Milk Shake", Icecream:"Dondurma", Baklava:"Baklava"} },
+      ku: { menuTitle:"نەفەس سویت",  categories:{ VIP:"ڤیپ", ColdDrink:"ڤەخارنێت تەزی", "Hot Drinks":"ڤەخارنێت گەرم", Cakes:"کێک", Smothy:"سموزی", Mohito:"موهیتو", Creap:"کریپ", Organicjuice:"شەربەت طەبیعی", Conafe:"کونافە", Milkshake:"میلک شیک", Icecream:"ئایس کریم", Baklava:"بەقلاوە"} }
     };
 
     let currentLang = 'tr';
@@ -412,7 +412,7 @@
         Organicjuice: ['Orange Juice','Lemon Juice','Kiwi Juice','Strawberry Juice','Banana Juice','Ananas Juice','Kiwi&Lemon Juice','Pomegranate Juice','Avocado Juice','Mango Juice'],
         Conafe: ['Pestatio Konafe','Mshekl Konafe','Kaymak Konafe','Penir Konafe'],
         Milkshake: ['Strawberry Milkshake','Blueberry Milkshake','Kinder Milkshake','Oreo Milkshake','Nutilla Milkshake','Lotus Milkshake','Pistachio Milkshake','Keramel Milkshake','Chocolate Milkshake'],
-        Icecream: ['Muz Dundurma scope','Pestatio Dundurma scope','Chikolata Dundurma scope','Bluberry Dundurma scope','Stawberry Dundurma scope','Mangu Dundurma scope','Limon Dundurma scope','Ezberi Portakal','Ezberi Bluberry&Strawberry'],
+        Icecream: ['Muz Dundurma','Pestatio Dundurma','Chikolata Dundurma','Bluberry Dundurma','Stawberry Dundurma','Mangu Dundurma','Limon Dundurma','Ezberi Portakal','Ezberi Bluberry&Strawberry'],
         Baklava: ['midye Baklava 1 Lb','sade Baklava 1 Lb','sarma Baklava 1 Lb','diber dodagi Baklava 1 Lb','duner Baklava 1 Lb','Teshrif 2 Lb Baklava']
       };
       const nameKuMap = {
@@ -625,7 +625,7 @@
     });
 
     // ===== INIT =====
-    setLanguage('ku');
+    setLanguage('kr');
     renderCategories();
     renderMenu();
   </script>
